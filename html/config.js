@@ -31,7 +31,7 @@
 //SiteName    = "My Radar Site"; // tooltip of the marker
 
 // Update GPS location (keep map centered on GPS location)
-//updateLocation = false;
+    updateLocation = true;
 
 // Color controls for the heywhatsthat upintheair range outline
 //range_outline_color = '#0000DD';
@@ -43,13 +43,13 @@
 //
 //
 // Style controls for the actual range outline (dynamic, by default 24h retention, see readsb options)
-// actual_range_outline_color = '#00596b';
+   actual_range_outline_color = '#800404';
 // actual_range_outline_width = 1.7;
 // NOTE: dashed lines cause slowdown when zooming in, not recommended
 // actual_range_outline_dash = null; // null - solid line, [5, 5] - dashed line with 5 pixel lines and spaces in between
 
 // Enable / disable showing the actual range outline when first visiting the page
-// actual_range_show = true;
+    actual_range_show = true;
 
 // which map is displayed to new visitors
 // MapType_tar1090 = "osm";
@@ -82,9 +82,9 @@
 // dwdLayers = 'dwd:RX-Produkt';
 
 // Default map dim state, true or false.
-// MapDim = true;
-// mapDimPercentage = 0.45;
-// mapContrastPercentage = 0;
+    MapDim = true;
+    mapDimPercentage = 0.28;
+    mapContrastPercentage = 0.08;
 
 // opacities for various overlays
 // nexradOpacity = 0.35
@@ -195,15 +195,16 @@ ColorByAlt = {
 // In miles, nautical miles, or km (depending settings value 'DisplayUnits')
 //SiteCirclesDistances = new Array(100,150,200,250);
 // When more circles defined than cirle colors last color will be used or black by default
+  SiteCirclesColors = ['#6c6c6c', '#6c6c6c', '#6c6c6c'];
 //SiteCirclesColors = ['#FF0000', '#0000FF', '#00FF00'];
 // Show circles using dashed line (CAUTION, can be slow, especially when zooming in a lot)
 //SiteCirclesLineDash = [5, 5]; // null - solid line, [5, 5] - dashed line with 5 pixel lines and spaces in between
 
 // Controls page title, righthand pane when nothing is selected
-//PageName = "tar1090";
+    PageName = "Radar SJP";
 
 // Show country flags by ICAO addresses?
-//ShowFlags = true;
+    ShowFlags = true;
 
 // Provide a Mapbox API key here to enable the Mapbox vector layers.
 // You can obtain a free key (with usage limits) at
@@ -259,10 +260,10 @@ ColorByAlt = {
 // planespottersLinks = false;
 
 // show links to various registration websites (not all countries)
-// registrationLinks = true;
+    registrationLinks = true;
 
 // enable callsign-based airline lookup from the operators database
-// airlineLookup = true;
+    airlineLookup = true;
 
 // Filter implausible positions (required speed > Mach 3.5)
 // valid values: true, false, "onlyMLAT" ("" required)
@@ -280,7 +281,7 @@ ColorByAlt = {
 //mlatTimeout = 30;
 
 // enable/disable mouseover/hover aircraft information
-//enableMouseover = true;
+   enableMouseover = true;
 
 // enable/disable temporary aircraft trails
 //tempTrails = false;
@@ -316,14 +317,14 @@ HideCols = [
 */ // remove this line to modify columns (and the one at the start)
 
 // show aircraft pictures
-// showPictures = true;
+    showPictures = true;
 // get pictures from planespotters.net
 // planespottersAPI = true;
 // get pictures from planespotting.be
 // planespottingAPI = true;
 
 // get flight route from routeApi service default setting (toggle via settings checkbox)
-// useRouteAPI = false;
+    useRouteAPI = true;
 // configure route display, possible values: iata, icao, city (can use multiple like this: iata+city)
 // routeDisplay = 'iata';
 // which routeApi service to use
@@ -334,7 +335,7 @@ HideCols = [
 // show a link to jetphotos, only works if planespottersAPI is disabled
 // jetphotoLinks = false;
 
-// showSil = false;
+    showSil = true;
 // this shows small pictures in the details but they need to be provided by the user in the folder /usr/local/share/tar1090/aircraft_sil
 // showPictures needs to be enabled as well
 // to only get these pictures disable the planespottersAPI
@@ -344,13 +345,13 @@ HideCols = [
 
 // labelsGeom = false; // labels: uses geometric altitude (WGS84 ellipsoid unless geomUseEGM is enabled
 // geomUseEGM = false; // use EGM96 for displaying geometric altitudes (extra load time!)
-// baroUseQNH = false;
+   baroUseQNH = true;
 
 // windLabelsSlim = false;
 // showLabelUnits = true;
 //
-// wideInfoBlock = false;
-// baseInfoBlockWidth = 200;
+   wideInfoBlock = true;
+   baseInfoBlockWidth = 230;
 
 //enableDWD = true;
 
@@ -376,6 +377,7 @@ HideCols = [
 //tableInView = false; // only show aircraft in current view (V button)
 
 //audio_url = ["", "", "", "", "", ""]; // show html5 audio player for these URLs
+  audio_url = [ ["http://d.liveatc.net/sbte2", "Teresina SBTE" ], ["http://d.liveatc.net/sbpl", "Petrolina SBPL"], ["http://d.liveatc.net/sbju", "Juazeiro do Norte SBJU Tower/Center"], ["http://d.liveatc.net/sbpb2", "Parnaiba SBPB Info"] ]; 
 // example with titles: audio_url = [ ["URL1", "title1" ], ["URL2", "title2"] ];
 
 // aiscatcher_server = "http://192.168.1.113:8100"; // update with your server address

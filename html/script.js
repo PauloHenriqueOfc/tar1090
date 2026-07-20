@@ -370,7 +370,7 @@ function fetchFail(jqxhr, status, error) {
             checkMovement();
         }
         status = jqxhr.status;
-        if (jqxhr.readyState == 0) error = "Can't connect to server, check your network!";
+        if (jqxhr.readyState == 0) error = "Não foi possível conectar ao servidor. Verifique sua conexão de rede!";
         let errText = status + (error ? (": " + error) : "");
         console.log(jqxhr);
         console.log(error);
@@ -914,21 +914,21 @@ function initPage() {
         };
         new Toggle({
             key: "moreTableLines1",
-            display: "More Table Lines",
+            display: "Mais linhas na tabela",
             container: "#sidebar-table",
             init: false,
             setState: setGlobeTableLimit,
         });
         new Toggle({
             key: "moreTableLines2",
-            display: "Even More Table Lines",
+            display: "Ainda mais linhas na tabela",
             container: "#sidebar-table",
             init: false,
             setState: setGlobeTableLimit,
         });
         new Toggle({
             key: "allTableLines",
-            display: "All Table Lines",
+            display: "Todas as linhas da tabela",
             container: "#sidebar-table",
             init: false,
             setState: setGlobeTableLimit,
@@ -1412,7 +1412,7 @@ function earlyInitPage() {
 
     new Toggle({
         key: "lastLeg",
-        display: "Last Leg only",
+        display: "Somente o último trecho",
         container: "#settingsLeft",
         init: true,
         setState: function(state) {
@@ -1500,7 +1500,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "utcTimesLive",
-        display: "Live track labels: UTC",
+        display: "Rótulos da trajetória ao vivo: UTC",
         container: "#settingsLeft",
         init: utcTimesLive,
         setState: function(state) {
@@ -1512,7 +1512,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "utcTimesHistoric",
-        display: "Historic track labels: UTC",
+        display: "Rótulos da trajetória histórica: UTC",
         container: "#settingsLeft",
         init: utcTimesHistoric,
         setState: function(state) {
@@ -1524,7 +1524,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "windLabelsSlim",
-        display: "Smaller wind labels",
+        display: "Rótulos de vento menores",
         container: "#settingsLeft",
         init: windLabelsSlim,
         setState: function(state) {
@@ -1539,7 +1539,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "showLabelUnits",
-        display: "Label units",
+        display: "Unidades dos rótulos",
         container: "#settingsLeft",
         init: showLabelUnits,
         setState: function(state) {
@@ -1564,7 +1564,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "shareFilters",
-        display: "Include Filters In URLs",
+        display: "Incluir filtros nas URLs",
         container: "#settingsRight",
         init: false,
         setState: function(state) {
@@ -1585,7 +1585,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "debugAll",
-        display: "Debug show all",
+        display: "Depuração: mostrar tudo",
         container: "#settingsRight",
         init: false,
         setState: function(state) {
@@ -1612,7 +1612,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "updateLocation",
-        display: "Update GPS location",
+        display: "Atualizar localização GPS",
         container: "#settingsRight",
         init: updateLocation,
         setState: function(state) {
@@ -1623,7 +1623,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "autoselect",
-        display: "Auto-select plane",
+        display: "Selecionar aeronave automaticamente",
         container: "#settingsRight",
         init: autoselect,
         setState: function(state) {
@@ -1638,7 +1638,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "ColoredPlanes",
-        display: "Colored Planes",
+        display: "Aeronaves coloridas",
         container: "#settingsRight",
         init: true,
         setState: function(state) {
@@ -1653,7 +1653,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "ColoredTrails",
-        display: "Colored Trails",
+        display: "Rastros Coloridas",
         container: "#settingsRight",
         init: true,
         setState: function(state) {
@@ -1723,7 +1723,7 @@ jQuery('#selected_altitude_geom1')
     }
     new Toggle({
         key: "planespottingAPI",
-        display: "Pictures planespotting.be",
+        display: "Fotos planespotting.be",
         container: "#settingsRight",
         init: planespottingAPI,
         setState: function(state) {
@@ -1737,7 +1737,7 @@ jQuery('#selected_altitude_geom1')
     });
     new Toggle({
         key: "planespottersAPI",
-        display: "Pictures planespotters.net",
+        display: "Fotos planespotters.net",
         container: "#settingsRight",
         init: planespottersAPI,
         setState: function(state) {
@@ -1757,7 +1757,7 @@ jQuery('#selected_altitude_geom1')
         }
         new Toggle({
             key: "useRouteAPI",
-            display: "Lookup route",
+            display: "Consultar rota",
             container: "#settingsRight",
             init: useRouteAPI,
             setState: function(state) {
@@ -1785,7 +1785,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "enableInfoblock",
-        display: "Enable Infoblock",
+        display: "Habilitar Infoblock",
         container: "#settingsRight",
         init: true,
         setState: function(state) {
@@ -1795,7 +1795,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "wideInfoblock",
-        display: "Wide Infoblock",
+        display: "Infoblock largo",
         container: "#settingsRight",
         init: wideInfoBlock,
         setState: function(state) {
@@ -1811,7 +1811,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "enableMouseover",
-        display: "Enable mouse-over block",
+        display: "Ativar bloco ao passar o mouse",
         container: "#settingsRight",
         init: enableMouseover,
         setState: function(state) {
@@ -1884,7 +1884,7 @@ function initLegend(colors) {
     if (!globeIndex)
         html += '<div class="legendTitle" style="background-color:' + colors['modeS'] + ';">Mode-S</div>';
     if (globeIndex)
-        html += '<div class="legendTitle" style="background-color:' + colors['other'] + ';">Other</div>';
+        html += '<div class="legendTitle" style="background-color:' + colors['other'] + ';">Outro</div>';
     if (aiscatcher_server)
         html += '<div class="legendTitle" style="background-color:' + colors['ais'] + ';">AIS</div>';
     html += '<div class="legendTitle" style="background-color:' + colors['adsc'] + `;">${jaeroLabel}</div>`;
@@ -1904,7 +1904,7 @@ function initSourceFilter(colors) {
     html += createFilter(colors['mlat'], 'MLAT', sources[2]);
     html += createFilter(colors['tisb'], 'TIS-B', sources[3]);
     html += createFilter(colors['modeS'], 'Mode-S', sources[4]);
-    html += createFilter(colors['other'], 'Other', sources[5]);
+    html += createFilter(colors['other'], 'Outro', sources[5]);
     html += createFilter(colors['adsc'], jaeroLabel, sources[6]);
 
     if (aiscatcher_server) {
@@ -1937,7 +1937,7 @@ function initFlagFilter(colors) {
     };
 
     let html = '';
-    html += createFilter(colors['tisb'], 'Military', flagFilterValues[0]);
+    html += createFilter(colors['tisb'], 'Militar', flagFilterValues[0]);
     //html += createFilter(colors['mlat'], 'Interesting');
     html += createFilter(colors['uat'], 'PIA', flagFilterValues[1]);
     html += createFilter(colors['adsb'], 'LADD', flagFilterValues[2]);
@@ -2521,7 +2521,7 @@ function webglAddLayer() {
         webglLayer = new ol.layer.WebGLPoints({
             name: 'webglLayer',
             type: 'overlay',
-            title: 'Aircraft pos. webGL',
+            title: 'Posições das aeronaves (WebGL)',
             source: webglFeatures,
             declutter: false,
             zIndex: 200,
@@ -2629,7 +2629,7 @@ function ol_map_init() {
         }),
         controls: [new ol.control.Zoom({delta: 1, duration: 0, target: 'map_canvas',}),
             new ol.control.Attribution({collapsed: true}),
-            new ol.control.ScaleLine({units: DisplayUnits})
+            new ol.control.ScaleLine({Units: DisplayUnits})
         ],
         interactions: new ol.interaction.defaults({altShiftDragRotate:false, pinchRotate:false,}),
         maxTilesLoading: 4,
@@ -2856,7 +2856,7 @@ function initMapEarly() {
     siteCircleLayer = new ol.layer.Vector({
         name: 'siteCircles',
         type: 'overlay',
-        title: 'Range rings',
+        title: 'Anéis de alcance',
         source: siteCircleFeatures,
         visible: SiteCircles,
         zIndex: 100,
@@ -2904,17 +2904,16 @@ function initMap() {
     // always hide this, it really only shows the number of positions saved
     jQuery('#dump1090_total_history_td').hide();
 
+    // ativar o botão replay 
+    jQuery('#RP').show();
+
     if ((globeIndex && aggregator) || filterUuid) {
         jQuery('#dump1090_message_rate_td').hide();
     }
-    if ((globeIndex && aggregator) || (receiverJson && receiverJson.haveReplay)) {
-        jQuery('#RP').show();
-    }
-
     locationDotLayer = new ol.layer.Vector({
         name: 'locationDot',
         type: 'overlay',
-        title: (receiverJson && receiverJson.lat != null) ? 'Site position' : 'Your position',
+        title: (receiverJson && receiverJson.lat != null) ? 'Posição da Estação' : 'Sua Posição',
         source: locationDotFeatures,
         visible: SiteShow,
         zIndex: 100,
@@ -2948,7 +2947,7 @@ function initMap() {
         actualOutline.layer = new ol.layer.Vector({
             name: 'actualRangeOutline',
             type: 'overlay',
-            title: 'actual range outline',
+            title: 'Contorno do alcance atual',
             source: actualOutline.features,
             zIndex: 101,
             renderBuffer: renderBuffer,
@@ -2982,7 +2981,7 @@ function initMap() {
 
     trailLayers = new ol.layer.Group({
         name: 'ac_trail',
-        title: 'Aircraft trails',
+        title: 'Rastros das Aeronaves',
         type: 'overlay',
         layers: trailGroup,
         zIndex: 150,
@@ -2993,7 +2992,7 @@ function initMap() {
     iconLayer = new ol.layer.Vector({
         name: 'iconLayer',
         type: 'overlay',
-        title: 'Aircraft positions',
+        title: 'Posições das Aeronaves',
         source: PlaneIconFeatures,
         declutter: false,
         zIndex: 200,
@@ -3026,7 +3025,7 @@ function initMap() {
 
     new Toggle({
         key: "darkerColors",
-        display: "Darker Colors",
+        display: "Cores mais escuras",
         container: "#settingsLeft",
         init: darkerColors,
         setState: function(state) {
@@ -3054,7 +3053,7 @@ function initMap() {
     }
     new Toggle({
         key: "darkMode",
-        display: "Dark Mode",
+        display: "Modo escuro",
         container: "#settingsLeft",
         init: darkModeDefault,
         setState: function(state) {
@@ -3108,7 +3107,7 @@ function initMap() {
 
     new Toggle({
         key: "MapDim",
-        display: "Dim Map",
+        display: "Escurecer mapa",
         container: "#settingsLeft",
         init: MapDim,
         setState: function(state) {
@@ -3430,6 +3429,7 @@ function displaySil() {
     setPhotoHtml(new_html);
     selected.icao.toUpperCase();
 }
+// Qualidade da foto 
 
 function displayPhoto() {
     if (!SelectedPlane)
@@ -3445,14 +3445,23 @@ function displayPhoto() {
         return;
     }
     let new_html="";
-    let photoToPull = photos[0]["thumbnail"]["src"] || photos[0]["thumbnail"];
-    let linkToPicture = photos[0]["link"];
-    //console.log(linkToPicture);
-    new_html = '<a class=\"link\" href="'+linkToPicture+'" target="_blank" rel="noopener noreferrer"><img id="airplanePhoto" src=' +photoToPull+'></a>';
-    let copyright = photos[0]["photographer"] || photos[0]["user"];
+    let p = photos[0];
+    let thumbSrc = (p["thumbnail_large"] && p["thumbnail_large"]["src"]) || (p["thumbnail"] && p["thumbnail"]["src"]) || p["thumbnail"];
+    let hdSrc = thumbSrc ? thumbSrc.replace('_280.jpg', '_1024.jpg') : null;
+    let linkToPicture = p["link"];
+    new_html = '<a class=\"link\" href="'+linkToPicture+'" target="_blank" rel="noopener noreferrer"><img id="airplanePhoto" src=' +thumbSrc+'></a>';
+    let copyright = p["photographer"] || p["user"];
     jQuery('#copyrightInfo').html("<span>Image © " + copyright +"</span>");
     setPhotoHtml(new_html);
     adjustInfoBlock();
+    if (hdSrc) {
+        let imgHD = new Image();
+        imgHD.onload = function() {
+            let el = document.getElementById('airplanePhoto');
+            if (el) el.src = hdSrc;
+        };
+        imgHD.src = hdSrc;
+    }
 }
 
 function refreshPhoto(selected) {
@@ -3493,7 +3502,7 @@ function refreshPhoto(selected) {
     }
     selected.psAPIparam = param;
 
-    setPhotoHtml("<p>Loading image...</p>");
+    setPhotoHtml("<p>Carregando imagem...</p>");
     jQuery('#copyrightInfo').html("<span></span>");
     //console.log(ts/1000 + 'sending psAPI request');
     selected.psAPIresponseTS = ts;
@@ -3571,7 +3580,7 @@ function refreshSelected() {
         if (selected.position_time) {
             const date = new Date(selected.position_time * 1000);
             let timestamp = utcTimesHistoric ? (zuluTime(date) + NBSP + 'Z') : (lDateString(date) + ' ' + localTime(date) + NBSP + TIMEZONE);
-            jQuery('#trace_time').updateText('Time:\n' + timestamp);
+            jQuery('#trace_time').updateText('Hora:\n' + timestamp);
         } else {
             jQuery('#trace_time').updateText('Time:\n');
         }
@@ -3786,8 +3795,24 @@ function refreshSelected() {
     } else {
         jQuery('#selected_seen_pos').updateText('n/a');
     }
+    // --- NOVA LÓGICA DA BANDEIRA PARA O PAÍS ---
+    let countryHtml = '';
+    if (selected.country_code) {
+    // Usa o mesmo caminho de SVG que a sua tabela usa (flags/3x2/XX.svg)
+    let flagUrl = 'flags/3x2/' + selected.country_code.toUpperCase() + '.svg';
+    
+    // AJUSTES VISTOS ABAIXO: margin-right reduzido para 4px | adicionado position e top para subir 1px
+    countryHtml = '<img src="' + flagUrl + '" style="width: 18px; height: 12px; vertical-align: middle; margin-right: 4px; position: relative; top: -1px;" title="' + selected.country + '"> ';
+    }
 
-    jQuery('#selected_country').updateText(selected.country.replace("special use", "special"));
+    // Tratamento padrão que o tar1090 já fazia com o texto "special use"
+    let countryText = selected.country.replace("special use", "special");
+
+    // Injeta a bandeira + o nome limpo do país usando .html()
+    jQuery('#selected_country').html(countryHtml + countryText);
+    // -------------------------------------------
+   //jQuery('#selected_country').updateText(selected.country.replace("special use", "special"));
+   //jQuery('#selected_country').updateText(selected.country.replace("special use", "special"));
 
     if (selected.position == null) {
         jQuery('#selected_position').updateText('n/a');
@@ -3813,12 +3838,12 @@ function refreshSelected() {
         ((selected.messages == undefined && selected.receiverCount) || (globeIndex && binCraft))
         && !showTrace
     ) {
-        jQuery('#selected_message_count').prev().updateText('Receivers:');
+        jQuery('#selected_message_count').prev().updateText('Receptores:');
         jQuery('#selected_message_count').prop('title', 'Number of receivers receiving this aircraft');
         if (selected.receiverCount >= 5 && selected.dataSource != 'mlat') {
-            jQuery('#selected_message_count').updateText('> ' + selected.receiverCount);
+            jQuery('#selected_message_count').updateText('> ' + selected.receiverCount); 
         } else {
-            jQuery('#selected_message_count').updateText(selected.receiverCount);
+            jQuery('#selected_message_count').updateText(selected.receiverCount || 1);
         }
     } else {
         jQuery('#selected_message_count').prev().updateText('Messages:');
@@ -4120,7 +4145,7 @@ function refreshFeatures() {
         td: '<td class="icaoCodeColumn">',
     };
     cols.country = {
-        text: 'Flag',
+        text: 'Bandeira',
         header: function() { return ""; },
         sort: function () { sortBy('country', compareAlpha, function(x) { return x.country; }); },
         value: function(plane) { return (plane.country_code ? ('<img width="18" height="12" style="display: block;margin: auto;" src="flags/3x2/' + plane.country_code.toUpperCase() + '.svg" title="' + plane.country + '"></img>') : ''); },
@@ -4135,7 +4160,7 @@ function refreshFeatures() {
             return (plane.flight || '');
         },
         html: flightawareLinks,
-        text: 'Callsign' };
+        text: 'Indicativo' };
     cols.airline = {
         text: 'Airline',
         sort: function () { sortBy('airline', compareAlphaCI, function(x) {
@@ -4164,19 +4189,19 @@ function refreshFeatures() {
                 }
             },
             html: true,
-            text: 'Route' };
+            text: 'Rota' };
     }
     cols.registration = {
         sort: function () { sortBy('registration', compareAlpha, function(x) { return x.registration; }); },
         value: function(plane) { return (flightawareLinks ? getFlightAwareIdentLink(plane.registration, plane.registration) : (plane.registration ? plane.registration : "")); },
         html: flightawareLinks,
-        text: 'Registration' };
+        text: 'Matrícula' };
     cols.type = {
         sort: function () { sortBy('type', compareAlpha, function(x) { return x.icaoType; }); },
         value: function(plane) { return (plane.icaoType != null ? plane.icaoType : ""); },
-        text: 'Type' };
+        text: 'Tipo' };
     cols.squawk = {
-        text: 'Squawk',
+        text: 'Transponder',
         sort: function () { sortBy('squawk', compareAlpha, function(x) { return x.squawk; }); },
         value: function(plane) { return (plane.squawk != null ? plane.squawk : ""); },
         align: 'right' };
@@ -4214,12 +4239,12 @@ function refreshFeatures() {
         value: function(plane) { return format_track_brief(plane.track); },
         align: 'right' };
     cols.msgs = {
-        text: 'Messages',
+        text: 'Mensagens',
         sort: function () { sortBy('msgs', compareNumeric, function(x) { return x.messages; }); },
         value: function(plane) { return plane.messages; },
         align: 'right' };
     cols.seen = {
-        text: 'Seen',
+        text: 'Últ. visto (s)',
         sort: function () { sortBy('seen', compareNumeric, function(x) { return x.seen; }); },
         value: function(plane) { return plane.seen.toFixed(0); },
         align: 'right' };
@@ -4239,22 +4264,22 @@ function refreshFeatures() {
         value: function(plane) { return (plane.position != null ? plane.position[0].toFixed(4) : ""); },
         align: 'right' };
     cols.data_source = {
-        text: 'Source',
+        text: 'Fonte',
         sort: function () { sortBy('data_source', compareNumeric, function(x) { return x.getDataSourceNumber(); } ); },
         value: function(plane) { return format_data_source(plane.getDataSource()); },
         align: 'right' };
     cols.military = {
-        text: 'Mil.',
-        sort: function () { sortBy('military', compareAlpha, function(x) { return (x.military ? 'yes' : 'no'); } ); },
-        value: function(plane) { return (plane.military ? 'yes' : 'no'); },
+        text: 'Militar.',
+        sort: function () { sortBy('military', compareAlpha, function(x) { return (x.military ? 'Sim' : 'Não'); } ); },
+        value: function(plane) { return (plane.military ? 'Sim' : 'Não'); },
         align: 'right' };
     cols.wd = {
-        text: 'Wind D.',
+        text: 'Dir. vento',
         sort: function () { sortBy('wd', compareNumeric, function(x) { return x.wd; }); },
         value: function(plane) { return plane.wd != null ? (plane.wd + '°') : ''; },
         align: 'right' };
     cols.ws = {
-        text: 'Wind S.',
+        text: 'Vel. vento',
         sort: function () { sortBy('ws', compareNumeric, function(x) { return x.ws; }); },
         value: function(plane) { return format_speed_brief(plane.ws, DisplayUnits); },
         align: 'right',
@@ -5222,7 +5247,7 @@ function invertMap(evt){
         }
         new Toggle({
             key: "altitudeChart",
-            display: "Altitude Chart",
+            display: "Gráfico de altitude",
             container: "#settingsRight",
             init: chartOn,
             setState: altitudeChart.render
@@ -5265,7 +5290,7 @@ function toggleTableInView(arg) {
         loStore['tableInView'] = tableInView;
     }
 
-    jQuery('#with_positions').text(tableInView ? "On Screen:" : "With Position:");
+    jQuery('#with_positions').text(tableInView ? "Na Tela:" : "With Position:");
 
     buttonActive('#V', tableInView);
 }
@@ -5562,10 +5587,10 @@ Filter.prototype.init = function() {
     const row = this.tbody.insertRow();
     row.innerHTML =
         `<td><form id="${this.id}">`
-        + '<div class="infoBlockTitleText">Filter by '+ this.name +':</div>'
+        + '<div class="infoBlockTitleText">Filtrar por '+ this.name +':</div>'
         + `<input id="${this.id}_input" name="${this.id}_name" type="text" class="searchInput" maxlength="1024">`
-        + '<button class="formButton" type="submit">Filter</button>'
-        + `<button class="formButton" id="${this.id}_reset">Reset</button>`
+        + '<button class="formButton" type="submit">Filtrar</button>'
+        + `<button class="formButton" id="${this.id}_reset">Limpar</button>`
         + '</form></td>'
     ;
     this.input = jQuery(this.sid + '_input');
@@ -5580,25 +5605,25 @@ function initFilters() {
     new Filter({
         key: 'callsign',
         field: 'name',
-        name: 'callsign',
+        name: 'Indicativo',
         table: "filterTable",
     });
     new Filter({
         key: 'squawk',
         field: 'squawk',
-        name: 'squawk',
+        name: 'Transponder',
         table: "filterTable",
     });
     new Filter({
         key: 'type',
         field: 'icaoType',
-        name: 'type code',
+        name: 'Código do tipo',
         table: "filterTable",
     });
     new Filter({
         key: 'description',
         field: 'typeDescription',
-        name: 'type description',
+        name: 'Descrição do tipo',
         table: "filterTable",
     });
     new Filter({
@@ -5612,27 +5637,27 @@ function initFilters() {
     new Filter({
         key: 'registration',
         field: 'registration',
-        name: 'registration',
+        name: 'Matrícula',
         table: 'filterTable3'
     });
     if (routeApiUrl) {
         new Filter({
             key: 'route',
             field: 'routeString',
-            name: 'route',
+            name: 'Rota',
             table: 'filterTable3'
         });
     }
     new Filter({
         key: 'country',
         field: 'country',
-        name: 'country of registration',
+        name: 'País de registro',
         table: 'filterTable3'
     });
     new Filter({
         key: 'category',
         field: 'category',
-        name: 'category (A3,B0,..)',
+        name: 'Categoria (A3,B0,..)',
         table: 'filterTable3'
     });
 
@@ -6815,7 +6840,7 @@ function legShift(offset, plane) {
         traceOpts.showTime = null;
 
     if (!multiSelect && !plane.fullTrace) {
-        jQuery('#leg_sel').text('No Data available for\n' + traceDateString);
+        jQuery('#leg_sel').text('Sem dados disponíveis para\n' + traceDateString);
         jQuery('#trace_time').text('UTC:\n');
     }
     if (!plane.fullTrace) {
@@ -6852,7 +6877,7 @@ function legShift(offset, plane) {
         legSel = -1;
 
     if (legSel == -1) {
-        jQuery('#leg_sel').text('Legs: All');
+        jQuery('#leg_sel').text('Trechos: Todos');
         traceOpts.legStart = null;
         traceOpts.legEnd = null;
         plane.processTrace();
@@ -6873,7 +6898,7 @@ function legShift(offset, plane) {
             count++;
         }
     }
-    jQuery('#leg_sel').text('Leg: ' + (legSel + 1));
+    jQuery('#leg_sel').text('Trecho: ' + (legSel + 1));
     traceOpts.legStart = legStart;
     traceOpts.legEnd = legEnd;
     plane.processTrace();
@@ -7198,14 +7223,14 @@ function remakeTrails() {
         plane.updateFeatures();
     }
 }
-
+// mudar a cor da bolinha localização 
 function createLocationDot() {
     locationDotFeatures.clear();
     let markerStyle = new ol.style.Style({
         image: new ol.style.Circle({
-            radius: 7,
+            radius: 6,
             snapToPixel: false,
-            fill: new ol.style.Fill({color: 'black'}),
+            fill: new ol.style.Fill({color: '#1591EA'}),
             stroke: new ol.style.Stroke({
                 color: 'white', width: 2
             })
@@ -7857,7 +7882,7 @@ function currentExtent(factor) {
 }
 
 function replayDefaults(ts) {
-    jQuery("#replayPlay").html("Pause");
+    jQuery("#replayPlay").html("Pausar");
     let playing = true;
     let speed = 30;
     if (usp.has("replaySpeed")) {
@@ -8037,13 +8062,13 @@ function initReplay(chunk, data) {
 
 function setReplayTimeHint(date) {
     if (true || utcTimesHistoric) {
-        jQuery("#replayDateHintLocal").html(TIMEZONE + " Date: " + lDateString(date));
+        jQuery("#replayDateHintLocal").html(TIMEZONE + " Data: " + lDateString(date));
         jQuery("#replayDateHint").html("" + zDateString(date));
         jQuery("#replayTimeHint").html("UTC:" + NBSP + zuluTime(date) + ' / ' + TIMEZONE + ":" + NBSP + localTime(date));
     } else {
         jQuery("#replayDateHintLocal").html("");
-        jQuery("#replayDateHint").html("Date: " + lDateString(date));
-        jQuery("#replayTimeHint").html("Time: " + localTime(date) + NBSP + TIMEZONE);
+        jQuery("#replayDateHint").html("Data: " + lDateString(date));
+        jQuery("#replayTimeHint").html("Hora: " + localTime(date) + NBSP + TIMEZONE);
     }
 }
 function replayOnSliderMove() {
@@ -8504,7 +8529,7 @@ function showReplayBar(){
                 replayStep();
             },
         });
-        jQuery('#replaySpeedHint').text('Speed: ' + replay.speed + 'x');
+        jQuery('#replaySpeedHint').text('Velocidade: ' + replay.speed + 'x');
 
         jQuery("#selected_showTrace_hide").hide();
 
@@ -8725,14 +8750,14 @@ function setAutoselect() {
 function registrationLink(plane) {
     
     const countryLinks = {
-        Brazil: (reg) => `https://sistemas.anac.gov.br/aeronaves/cons_rab_resposta_en.asp?textMarca=${reg}`,
-        Australia: (reg) => `https://www.casa.gov.au/search-centre/aircraft-register?reg=${reg.replace(/^VH-/, '')}`,
+        Brasil: (reg) => `https://aeronaves.anac.gov.br/aeronaves/cons_rab_resposta_en.asp?textMarca=${reg}`,
+        Austrália: (reg) => `https://www.casa.gov.au/search-centre/aircraft-register?reg=${reg.replace(/^VH-/, '')}`,
         Jamaica: (reg) => `https://www.jcaa.gov.jm/aircraft-registry/${reg}`,
         Montenegro: (reg) => `https://www.caa.me/en/registri?field_registarska_oznaka1_value=${reg}`,
-        Norway: (reg) => `https://www.luftfartstilsynet.no/aktorer/norges-luftfartoyregister/registrerte-luftfartoy/?mark=${reg}`,
-        Iceland: (reg) => `https://island.is/en/aircraft-registry?aq=${reg.replace(/^TF-/, '')}`,
-        "New Zealand": (reg) => `https://www.aviation.govt.nz/aircraft/aircraft-registration/aircraft-register-search/ShowDetails/${reg.replace(/^ZK-/, '')}`,
-        "United States": (reg) => `https://registry.faa.gov/AircraftInquiry/Search/NNumberResult?nNumberTxt=${reg.slice(1)}`
+        Noruega: (reg) => `https://www.luftfartstilsynet.no/aktorer/norges-luftfartoyregister/registrerte-luftfartoy/?mark=${reg}`,
+        Islândia: (reg) => `https://island.is/en/aircraft-registry?aq=${reg.replace(/^TF-/, '')}`,
+        "Nova Zelândia": (reg) => `https://www.aviation.govt.nz/aircraft/aircraft-registration/aircraft-register-search/ShowDetails/${reg.replace(/^ZK-/, '')}`,
+        "Estados Unidos": (reg) => `https://registry.faa.gov/AircraftInquiry/Search/NNumberResult?nNumberTxt=${reg.slice(1)}`
     };
 
     const generator = countryLinks[plane.country];
@@ -9111,15 +9136,23 @@ function printTrace() {
     console.log('recent trace');
     _printTrace(SelectedPlane.recentTrace.trace);
 }
-
+// Copiar Link 
 function copyShareLink() {
-    navigator.clipboard.writeText(shareLink);
-
+    try {
+        navigator.clipboard.writeText(shareLink);
+    } catch (e) {
+        var el = document.createElement('textarea');
+        el.value = shareLink;
+        el.style.cssText = 'position:absolute;left:-9999px';
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+    }
     copyLinkTime = new Date().getTime();
     copiedIcao = SelectedPlane.icao;
     setSelectedIcao();
 }
-
 let copyLinkTime = 0;
 let copiedIcao = null;
 
@@ -9134,11 +9167,20 @@ function setSelectedIcao() {
         if (copiedIcao && (copiedIcao != selected.icao || new Date().getTime() - copyLinkTime > 2000)) {
             copiedIcao = null;
         }
-        let copy_link_text = (copiedIcao != null) ? "Copied" : ("Copy" + NBSP + "Link");
-        let icao_link = "<span  class=identSmall><a class='link identSmall' target=\"_blank\" href=\"" + shareLink +
-            "\" onclick=\"copyShareLink(); return false;\">" + copy_link_text + "</a></span>";
-        hex_html = hex_html + NBSP + NBSP + NBSP + icao_link;
-    }
+        // Copiar link
+//        let copy_link_text = (copiedIcao != null) ? "Copiado" : ("Copiar" + NBSP + "Link");
+//        let icao_link = "<span  class=identSmall><a class='link identSmall' target=\"_blank\" href=\"" + shareLink +
+//            "\" onclick=\"copyShareLink(); return false;\">" + copy_link_text + "</a></span>";
+//        hex_html = hex_html + NBSP + NBSP + NBSP + icao_link;
+       }
+    let copy_link_text = (copiedIcao != null)
+    ? "Copiado"
+    : "<i class='fa-solid fa-share-nodes'></i>";
+
+let icao_link = "<span class=identSmall><a class='link identSmall' target=\"_blank\" href=\"" + shareLink +
+    "\" onclick=\"copyShareLink(); return false;\" title=\"Copiar link\">" + copy_link_text + "</a></span>";
+
+hex_html = hex_html + NBSP + NBSP + NBSP + icao_link;
     jQuery('#selected_icao').html(hex_html);
 
     jQuery('a.identSmall').prop('href',shareLink);

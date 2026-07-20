@@ -22,25 +22,25 @@ let UnitLabels = {
 };
 
 let aircraftCategories = {
-    'A0': 'Unspecified powered aircraft',
-    'A1': `Light (< 15${NNBSP}500${NBSP}lb)`,
-    'A2': `Small (15${NNBSP}500 to 75${NNBSP}000${NBSP}lb)`,
-    'A3': `Large (75${NNBSP}000 to 300${NNBSP}000${NBSP}lb)`,
-    'A4': 'High Vortex Large(aircraft such as B-757)',
-    'A5': `Heavy (> 300${NNBSP}000${NBSP}lb)`,
-    'A6': `High Performance (> 5${NBSP}g acceleration and > 400${NBSP}kt)`,
-    'A7': 'Rotorcraft',
-    'B0': 'Unspecified unpowered aircraft or UAV or spacecraft',
-    'B1': 'Glider/sailplane',
-    'B2': 'Lighter-than-Air',
-    'B3': 'Parachutist/Skydiver',
-    'B4': 'Ultralight/hang-glider/paraglider',
-    'B6': 'Unmanned Aerial Vehicle',
-    'B7': 'Space/Trans-atmospheric vehicle',
-    'C0': 'Unspecified ground installation or vehicle',
-    'C1': `Surface Vehicle ${ENDASH} Emergency Vehicle`,
-    'C2': `Surface Vehicle ${ENDASH} Service Vehicle`,
-    'C3': 'Fixed Ground or Tethered Obstruction'
+    'A0': 'Aeronave motorizada não especificada',
+    'A1': `Leve (< 15${NNBSP}500${NBSP}lb)`,
+    'A2': `Pequena (15${NNBSP}500 a 75${NBSP}000${NBSP}lb)`,
+    'A3': `Grande (75${NNBSP}000 a 300${NBSP}000${NBSP}lb)`,
+    'A4': 'Grande com alto vórtice (aeronaves como B-757)',
+    'A5': `Pesada (> 300${NNBSP}000${NBSP}lb)`,
+    'A6': `Alto desempenho (> 5${NBSP}g de aceleração e > 400${NBSP}kt)`,
+    'A7': 'Helicóptero',
+    'B0': 'Aeronave sem motor, UAV ou veículo espacial não especificado',
+    'B1': 'Planador',
+    'B2': 'Mais leve que o ar',
+    'B3': 'Paraquedista/Praticante de salto',
+    'B4': 'Ultraleve/asa-delta/parapente',
+    'B6': 'Veículo aéreo não tripulado (VANT)',
+    'B7': 'Veículo espacial/Transatmosférico',
+    'C0': 'Instalação ou veículo terrestre não especificado',
+    'C1': `Veículo de superfície ${ENDASH} Veículo de emergência`,
+    'C2': `Veículo de superfície ${ENDASH} Veículo de serviço`,
+    'C3': 'Obstrução fixa no solo ou amarrada'
 };
 
 // formatting helpers
