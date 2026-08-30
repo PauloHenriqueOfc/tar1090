@@ -893,7 +893,7 @@ PlaneObject.prototype.updateIcon = function() {
             }
         } else if (g.extendedLabels == 3) {
             if (!windLabelsSlim) {
-                labelText += 'Wind' + NBSP;
+                labelText += 'Vento' + NBSP;
             }
             if (this.wd != null) {
                 if (showLabelUnits) {
@@ -904,7 +904,7 @@ PlaneObject.prototype.updateIcon = function() {
                     labelText += format_speed_brief(this.ws, DisplayUnits);
                 }
             } else {
-                labelText += 'n/a';
+                labelText += 'N/D';
             }
             if (windLabelsSlim) {
                 labelText += '\n' + altString;

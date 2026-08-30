@@ -978,28 +978,85 @@ function earlyInitPage() {
         if (!Array.isArray(audio_url)) {
             audio_url = [ audio_url ];
         }
+
         let html = "";
+
         for (const entry of audio_url) {
             let url = entry;
             let title = entry;
+
             if (Array.isArray(url)) {
                 url = entry[0];
                 title = entry[1];
             }
+
             if (url) {
                 html += `
-                    <tr><td style="text-align: center">${title}</td></tr>
-                    <tr><td style="text-align: center">
-                    <audio crossorigin="anonymous" preload="none" src="${url}" type="audio/mp3" controls="controls" autoplay="false"></audio>
-                    </td></tr>
+                    <tr>
+                        <td style="text-align: center">${title}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center">
+                            <audio
+                                crossorigin="anonymous"
+                                preload="none"
+                                src="${url}"
+                                type="audio/mp3"
+                                controls="controls"
+                                autoplay="false">
+                            </audio>
+                        </td>
+                    </tr>
                 `;
             }
         }
+
         if (html) {
+            // Primeiro cria e mostra os players
             document.getElementById('mp3player').innerHTML = html;
             jQuery('#mp3player').show();
+
+            // Depois adiciona o comportamento de voltar ao áudio ao vivo
+            document.querySelectorAll('#mp3player audio').forEach(function(audio) {
+                let pageWasHidden = false;
+                let reloading = false;
+
+                document.addEventListener('visibilitychange', function() {
+                    if (document.hidden && !audio.paused) {
+                        pageWasHidden = true;
+                    }
+                });
+
+                audio.addEventListener('play', function() {
+                    if (!pageWasHidden || reloading) {
+                        return;
+                    }
+
+                    pageWasHidden = false;
+                    reloading = true;
+
+                    const url = audio.currentSrc || audio.src;
+
+                    audio.pause();
+                    audio.removeAttribute('src');
+                    audio.load();
+
+                    audio.src = url;
+                    audio.load();
+
+                    audio.play()
+                        .catch(function(err) {
+                            console.log('Erro ao retomar áudio ao vivo:', err);
+                        })
+                        .finally(function() {
+                            reloading = false;
+                        });
+                });
+            });
         }
     }
+
+    // DAQUI PARA BAIXO CONTINUA O CÓDIGO ORIGINAL DA earlyInitPage()
 
     let value;
 
@@ -1475,12 +1532,12 @@ jQuery('#selected_altitude_geom1')
         setState: function(state) {
             baroUseQNH = state;
             if (baroUseQNH) {
-                jQuery('#selected_altitude1_title').updateText('Corr. baro-alt');
-                jQuery('#selected_altitude2_title').updateText('Corr. baro.');
+                jQuery('#selected_altitude1_title').updateText('Alt. barométrica corrigida');
+                jQuery('#selected_altitude2_title').updateText('Correção barométrica');
                 jQuery('#infoblock_altimeter').removeClass('hidden');
             } else {
-                jQuery('#selected_altitude1_title').updateText('Baro. altitude');
-                jQuery('#selected_altitude2_title').updateText('Barometric');
+                jQuery('#selected_altitude1_title').updateText('Altitude barométrica');
+                jQuery('#selected_altitude2_title').updateText('Barométrica');
                 jQuery('#infoblock_altimeter').addClass('hidden');
             }
             if (loadFinished) {
@@ -2141,7 +2198,7 @@ function clearIntervalTimers(arg) {
 
     if (loadFinished && arg != 'silent') {
         console.log(localTime(new Date()) + ' clear timers');
-        jQuery("#timers_paused_detail").text('Timers paused (tab hidden).');
+        jQuery("#timers_paused_detail").text('Temporizadores pausados (aba oculta).');
         jQuery("#timers_paused").css('display','block');
     }
     const entries = Object.entries(timers);
@@ -3432,35 +3489,108 @@ function displaySil() {
 // Qualidade da foto 
 
 function displayPhoto() {
-    if (!SelectedPlane)
+    if (!SelectedPlane) {
         return;
+    }
+
     if (!SelectedPlane.psAPIresponse) {
         displaySil();
         return;
     }
-    let photos = SelectedPlane.psAPIresponse["photos"] || SelectedPlane.psAPIresponse["images"];
-    if (!photos || photos.length == 0) {
+
+    const photos =
+        SelectedPlane.psAPIresponse["photos"] ||
+        SelectedPlane.psAPIresponse["images"];
+
+    if (!photos || photos.length === 0) {
         displaySil();
         adjustInfoBlock();
         return;
     }
-    let new_html="";
-    let p = photos[0];
-    let thumbSrc = (p["thumbnail_large"] && p["thumbnail_large"]["src"]) || (p["thumbnail"] && p["thumbnail"]["src"]) || p["thumbnail"];
-    let hdSrc = thumbSrc ? thumbSrc.replace('_280.jpg', '_1024.jpg') : null;
-    let linkToPicture = p["link"];
-    new_html = '<a class=\"link\" href="'+linkToPicture+'" target="_blank" rel="noopener noreferrer"><img id="airplanePhoto" src=' +thumbSrc+'></a>';
-    let copyright = p["photographer"] || p["user"];
-    jQuery('#copyrightInfo').html("<span>Image © " + copyright +"</span>");
+
+    const p = photos[0];
+
+    // ---------------------------------------------------------
+    // Thumbnail padrão
+    // ---------------------------------------------------------
+    let thumbnailSrc = null;
+
+    if (p.thumbnail) {
+        if (typeof p.thumbnail === "object") {
+            thumbnailSrc = p.thumbnail.src || null;
+        } else if (typeof p.thumbnail === "string") {
+            thumbnailSrc = p.thumbnail;
+        }
+    }
+
+    // ---------------------------------------------------------
+    // Imagem maior, somente quando FORNECIDA pela API
+    // ---------------------------------------------------------
+    let largeSrc = null;
+
+    if (p.thumbnail_large) {
+        if (typeof p.thumbnail_large === "object") {
+            largeSrc = p.thumbnail_large.src || null;
+        } else if (typeof p.thumbnail_large === "string") {
+            largeSrc = p.thumbnail_large;
+        }
+    }
+
+    // Prioridade:
+    // 1. thumbnail_large oficial
+    // 2. thumbnail normal
+    const photoSrc = largeSrc || thumbnailSrc;
+
+    if (!photoSrc) {
+        displaySil();
+        adjustInfoBlock();
+        return;
+    }
+
+    const linkToPicture = p.link || photoSrc;
+
+    const new_html =
+        '<a class="link" href="' +
+        linkToPicture +
+        '" target="_blank" rel="noopener noreferrer">' +
+        '<img id="airplanePhoto" ' +
+        'src="' + photoSrc + '" ' +
+        'alt="Foto da aeronave">' +
+        '</a>';
+
+    const copyright =
+        p.photographer ||
+        p.user ||
+        "";
+
+    if (copyright) {
+        jQuery('#copyrightInfo').html(
+            "<span>Image © " + copyright + "</span>"
+        );
+    } else {
+        jQuery('#copyrightInfo').html("");
+    }
+
     setPhotoHtml(new_html);
     adjustInfoBlock();
-    if (hdSrc) {
-        let imgHD = new Image();
-        imgHD.onload = function() {
-            let el = document.getElementById('airplanePhoto');
-            if (el) el.src = hdSrc;
-        };
-        imgHD.src = hdSrc;
+
+    // ---------------------------------------------------------
+    // Se a versão grande falhar, volta para thumbnail padrão
+    // ---------------------------------------------------------
+    if (largeSrc && thumbnailSrc && largeSrc !== thumbnailSrc) {
+        const img = document.getElementById('airplanePhoto');
+
+        if (img) {
+            img.onerror = function() {
+                console.warn(
+                    "thumbnail_large falhou; usando thumbnail:",
+                    largeSrc
+                );
+
+                this.onerror = null;
+                this.src = thumbnailSrc;
+            };
+        }
     }
 }
 
@@ -3630,7 +3760,7 @@ function refreshSelected() {
     if (selected.military)
         dbFlags += 'military / ';
     if (dbFlags.length == 0) {
-        jQuery('#selected_dbFlags').updateText("none");
+        jQuery('#selected_dbFlags').updateText("Nenhum");
     } else {
         jQuery('#selected_dbFlags').html(dbFlags.slice(0, -3));
     }
@@ -3674,8 +3804,8 @@ function refreshSelected() {
     jQuery('#selected_onground').updateText(format_onground(selected.altitude));
 
     if (selected.squawk == null || selected.squawk == '0000') {
-        jQuery('#selected_squawk1').updateText('n/a');
-        jQuery('#selected_squawk2').updateText('n/a');
+        jQuery('#selected_squawk1').updateText('N/D');
+        jQuery('#selected_squawk2').updateText('N/D');
     } else {
         jQuery('#selected_squawk1').updateText(selected.squawk);
         jQuery('#selected_squawk2').updateText(selected.squawk);
@@ -3686,7 +3816,7 @@ function refreshSelected() {
             jQuery('#selected_route').updateText(selected.routeString);
             jQuery('#selected_route').attr('title', selected.routeVerbose);
         } else {
-            jQuery('#selected_route').updateText('n/a');
+            jQuery('#selected_route').updateText('N/D');
         }
     }
 
@@ -4283,7 +4413,7 @@ function refreshFeatures() {
         sort: function () { sortBy('ws', compareNumeric, function(x) { return x.ws; }); },
         value: function(plane) { return format_speed_brief(plane.ws, DisplayUnits); },
         align: 'right',
-        header: function () { return 'Wind' + NBSP + '(' + get_unit_label("speed", DisplayUnits) + ')'; },
+        header: function () { return 'Vento' + NBSP + '(' + get_unit_label("speed", DisplayUnits) + ')'; },
     };
 
     const colsEntries = Object.entries(cols);

@@ -333,7 +333,7 @@ HideCols = [
 // routeApiUrl = ""; // to disable route API so it can't be enabled by a website visitor
 
 // show a link to jetphotos, only works if planespottersAPI is disabled
-// jetphotoLinks = false;
+   jetphotoLinks = true;
 
     showSil = true;
 // this shows small pictures in the details but they need to be provided by the user in the folder /usr/local/share/tar1090/aircraft_sil
@@ -348,7 +348,7 @@ HideCols = [
    baroUseQNH = true;
 
 // windLabelsSlim = false;
-// showLabelUnits = true;
+   showLabelUnits = true;
 //
    wideInfoBlock = true;
    baseInfoBlockWidth = 230;
