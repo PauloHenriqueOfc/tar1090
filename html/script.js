@@ -8880,8 +8880,11 @@ function setAutoselect() {
 function registrationLink(plane) {
     
     const countryLinks = {
+
         Brasil: (reg) => `https://aeronaves.anac.gov.br/aeronaves/cons_rab_resposta_en.asp?textMarca=${reg}`,
         Austrália: (reg) => `https://www.casa.gov.au/search-centre/aircraft-register?reg=${reg.replace(/^VH-/, '')}`,
+
+
         Jamaica: (reg) => `https://www.jcaa.gov.jm/aircraft-registry/${reg}`,
         Montenegro: (reg) => `https://www.caa.me/en/registri?field_registarska_oznaka1_value=${reg}`,
         Noruega: (reg) => `https://www.luftfartstilsynet.no/aktorer/norges-luftfartoyregister/registrerte-luftfartoy/?mark=${reg}`,
