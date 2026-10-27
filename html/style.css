@@ -71,6 +71,19 @@ select {
     height: 100%;
     z-index:3;
 }
+/* Esconder a barra de rolagem do InfoBlock */
+#selected_infoblock,
+#infoblock-container {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+#selected_infoblock::-webkit-scrollbar,
+#infoblock-container::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
+}
 #sidebar_canvas {
     padding: calc( 5px * var(--SCALE));
     overflow: auto;
@@ -259,8 +272,8 @@ select {
 
 .error_box {
     position: absolute; bottom: calc( 90px * var(--SCALE)); left: calc( 25px * var(--SCALE)); border: calc( 2px * var(--SCALE)) solid red;
-    background-color: #FFFFA3; opacity: 0.75; filter:alpha(opacity=75); padding: calc( 5px * var(--SCALE));
-    color: black;
+    background-color: #DE5656; opacity: 0.75; filter:alpha(opacity=75); padding: calc( 5px * var(--SCALE));
+    color: white;
     font-weight: bold;
     font-size: var(--FS3);
     line-height: 150%;
@@ -291,9 +304,9 @@ select {
 #loader {position: absolute; width: 25%; height: 30px; z-index: 9999; top: 50%; left: 37.5%}
 #loader_progress { width:  100%; height: 100%; position: absolute; }
 
-
+/*mudar cor dos fundo dos títulos hex, callsign etc */
 .aircraft_table_header {
-    background-color: var(--ACCENT);
+    background-color: #0073DE;
     color: #FFFFFF;
     cursor: pointer;
     position: sticky;
@@ -420,8 +433,8 @@ select.error, textarea.error, input.error {
     width: 100%;
     text-transform: uppercase;
     text-align: center;
-    color: #e8e8e8;
-    background: #003f4b;
+    color: #FFFFFF;
+    background: #327DB6;
 }
 
 .section-title-content {
@@ -446,7 +459,7 @@ select.error, textarea.error, input.error {
 }
 
 .link, .link a {
-    color: var(--TXTCOLOR1);
+    color: #327DB6;
     text-decoration: underline;
 }
 
@@ -465,9 +478,9 @@ select.error, textarea.error, input.error {
     height: calc( 38px * var(--SCALE));
     z-index: 9;
 }
-
+/*mudar cor dos botões conf e Full screen */
 .svgButton {
-    background-color: var(--ACCENT);
+    background-color: #1F0ECA;
     width: calc( 27px * var(--SCALE));
     height: calc( 27px * var(--SCALE));
     cursor: pointer;
@@ -493,7 +506,7 @@ select.error, textarea.error, input.error {
 
 
 .button {
-    background-color: var(--ACCENT);
+    background-color: #1E3A5F;
     width: calc( 27px * var(--SCALE));
     height: calc( 27px * var(--SCALE));
     border-radius: calc( 2px * var(--SCALE));
@@ -524,7 +537,7 @@ select.error, textarea.error, input.error {
 }
 
 .activeButton {
- color:#000
+ color:#327DB6
 }
 .inActiveButton {
  color:#fff
@@ -690,8 +703,8 @@ table.infoSectionTable tr td {
 
 .infoblockCloseBox {
     position: absolute;
-    right: calc( 20px * var(--SCALE));
-    top: calc( 8px * var(--SCALE));
+    right: calc( 0px * var(--SCALE));
+    top: calc( 0px * var(--SCALE));
     background-image: url('images/close-settings.png');
     background-size: cover;
     width: calc( 20px * var(--SCALE));
@@ -750,6 +763,7 @@ table.infoSectionTable tr td {
 .ui-tabs {
     background-color: var(--BGCOLOR1);
 }
+/* Cor do fundo Pesquisar Filtrar Colunas */
 .ui-tabs-nav {
     background-color: var(--BGCOLOR2);
 }
@@ -849,8 +863,9 @@ table.infoSectionTable tr td {
   background: var(--BGCOLOR1);
   border: none;
 }
+/* cor dos botões ativos pesquisar Filtrar colunas */
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
-  background: #3d7382;
+  background: #00649E;
 }
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited, a.ui-button, a:link.ui-button, a:visited.ui-button, .ui-button {
   color:var(--TXTCOLOR2);
@@ -871,8 +886,9 @@ table.infoSectionTable tr td {
 .ui-slider {
     background-color: var(--BGCOLOR2);
 }
+/*Mudar cor dos botões barras slide */
 .ui-slider .ui-slider-handle {
-    background-color: rgb(0, 115, 222);
+    background-color: rgb(255, 0, 0);
 }
 
 
@@ -938,4 +954,537 @@ input{
 }
 #replaySpeedHint{
   grid-area: speedHint;
+}
+/* =========================
+CUSTOMIZAÇÕES TAR1090
+========================= */
+
+/* Remove créditos/OpenStreetMap */
+#credits,
+.ol-attribution,
+#copyrightInfo,
+#copyrightInfo_fake {
+display: none !important;
+}
+
+/* Remove linha azul do infoblock */
+#splitter-infoblock {
+border: none !important;
+background: transparent !important;
+}
+
+/* Remove bordas entre seções */
+#reg_info .infoSectionTable tr {
+border: none !important;
+}
+
+/* Remove espaços laterais da foto */
+/*#reg_info,
+#photo_container td {
+padding-left: 8px !important;
+padding-right: 8px !important;
+}
+*/
+/* Remove espaços acima/abaixo da foto */
+#pf_info_container td,
+#photo_container td {
+padding-top: 0 !important;
+padding-bottom: 0 !important;
+}
+
+/* Container da foto */
+/*#selected_photo {
+width: 100% !important;
+margin: 0 !important;
+padding: 0 !important;
+text-align: center;
+display: block;
+}
+*/
+/* Foto fullscreen */
+#selected_photo img {
+display: block;
+width: 100% !important;
+height: 150px !important; /* <--/* Altere este valor para /* a altura exata que você deseja */
+object-fit: cover;
+margin: 0;
+}
+
+/* Remove espaços extras das linhas */
+#reg_info .infoSectionTable tr {
+height: auto !important;
+}
+
+#reg_info .infoSectionTable td {
+line-height: normal !important;
+}
+
+/* Remove linha azul do highlighted */
+.highlightedTitle {
+border-bottom: none !important;
+}
+/* Remove botão X do infoblock */
+/*.infoblockCloseBox {
+    display: none !important;
+}*/
+/* Mantém informações alinhadas */
+#photo_container td {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+/* Faz a imagem ultrapassar o padding */
+#selected_photo {
+    margin-left: -8px !important;
+    margin-right: -8px !important;
+    width: calc(100% + 16px) !important;
+}
+/*.siteTitle {
+    color: #7dd3fc;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 4px 10px;
+    margin-right: 8px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.65);
+    white-space: nowrap;
+    flex-shrink: 0;
+}*/
+ .siteTitle {
+    color: #4fd8ff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 4px 10px;
+    margin-right: 8px;
+    border-radius: 6px;
+    background: rgba(15, 23, 42, 0.72);
+    white-space: nowrap;
+    flex-shrink: 0;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(79,216,255,0.18);
+}
+#selected_icao .fa-share-nodes {
+    font-size: 18px;
+}
+#selected_airline_logo img {
+    max-height: 30px !important;
+    vertical-align: middle;
+    margin-right: 8px;
+    height: 32px !important;
+}
+#selected_airline_banner {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+#selected_airline_banner img {
+    max-width: 100%;
+    max-height: 50px;
+}
+#selected_airline_logo {
+    display: inline-block;
+    vertical-align: middle;
+}
+#selected_infoblock .infoHeading,
+#selected_infoblock .infoData,
+#selected_infoblock .identLarge,
+#selected_infoblock .identMedium,
+#selected_infoblock .identSmall {
+    color: #000000 !important;
+}
+/* =========================================
+   CORES PERSONALIZADAS - INFO / HISTÓRICO
+   ========================================= */
+
+/* Fundo principal do InfoBlock */
+#selected_infoblock {
+    background-color: #EDEDED !important;
+    color: #000000 !important;
+}
+
+/* Fundo das seções internas do InfoBlock */
+#selected_infoblock .infoBlockSection,
+#selected_infoblock .infoSectionTable {
+    background-color: #EDEDED !important;
+}
+
+/* Textos do InfoBlock */
+#selected_infoblock .infoHeading,
+#selected_infoblock .infoData,
+#selected_infoblock .identLarge,
+#selected_infoblock .identMedium,
+#selected_infoblock .identSmall,
+#selected_infoblock .largeText,
+#selected_infoblock .infoBlockTitleText {
+    color: #000000 !important;
+}
+
+
+/* =========================================
+   HISTÓRICO / REPLAY
+   ========================================= */
+
+/* Barra inferior do histórico */
+#replayBar {
+    background-color: #EDEDED !important;
+    color: #000000 !important;
+}
+
+/* Textos da barra de histórico */
+#replayBar,
+#replayBar label,
+#replayBar span,
+#replayBar div {
+    color: #000000 !important;
+}
+
+
+/* =========================================
+   DATA / HORA UTC
+   ========================================= */
+
+#replayTimeZone,
+#replayDateHint,
+#replayDateHintLocal,
+#replayTimeHint,
+#replaySpeedHint {
+    color: #000000 !important;
+}
+
+
+/* =========================================
+   CAIXA DE ESCOLHER DATA
+   ========================================= */
+
+#replayDatepicker {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+}
+
+#replayDatepicker input,
+#replayDatepicker select {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    border: 1px solid #999999 !important;
+}
+
+
+/* Caixa de seleção de hora/minuto/velocidade */
+#hourSelect,
+#minuteSelect,
+#replaySpeedSelect {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    border: 1px solid #999999 !important;
+}
+/* =========================================================
+   HISTÓRICO DO INFOBLOCK
+   ========================================================= */
+
+/* Fundo geral da área do histórico */
+#history_collapse {
+    background-color: #EDEDED !important;
+    color: #000000 !important;
+}
+
+
+/* Título "Histórico" */
+#show_trace {
+    background-color: #D6D6D6 !important;
+    color: #000000 !important;
+    border: 1px solid #999999 !important;
+}
+
+
+/* "Dia UTC", horário e textos */
+#history_collapse .identSmall,
+#history_collapse #trace_date,
+#history_collapse #leg_sel,
+#history_collapse #trace_time {
+    color: #000000 !important;
+}
+
+
+/* =========================================================
+   BOTÕES
+   ========================================================= */
+
+/* Todos os botões do histórico */
+#history_collapse .formButton {
+    background-color: #D6D6D6 !important;
+    color: #000000 !important;
+    border: 1px solid #999999 !important;
+}
+
+
+/* Efeito ao passar o mouse */
+#history_collapse .formButton:hover {
+    background-color: #C4C4C4 !important;
+}
+
+
+/* =========================================================
+   CAMPO "ESCOLHER DATA"
+   ========================================================= */
+
+#histDatePicker {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    border: 1px solid #999999 !important;
+}
+
+
+/* Texto/placeholder "Pick a date" */
+#histDatePicker::placeholder {
+    color: #555555 !important;
+}
+
+
+/* =========================================================
+   BOTÃO HISTÓRICO
+   ========================================================= */
+
+#show_trace.greyButton {
+    background-color: #D6D6D6 !important;
+    color: #000000 !important;
+    border: 1px solid #999999 !important;
+}
+
+#show_trace.greyButton:hover {
+    background-color: #C4C4C4 !important;
+}
+/* =========================================
+   BOTÃO COMPARTILHAR - INFOBLOCK
+   ========================================= */
+
+/* Linha do callsign e botão */
+#selected_infoblock .titleHeaderRow {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    margin-bottom: 6px;
+}
+
+/* Callsign, logo e tipo */
+#selected_infoblock .identLarge {
+    background: transparent !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+/* Posição do botão */
+#selected_infoblock .shareLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(20px); /* ajustar posição do botão compartilhar*/
+}
+
+/* Aparência do botão */
+#selected_infoblock .shareLink a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    color: #808080 !important;
+  /*  background-color: #2D3748;*/
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+/* Efeito ao passar o mouse */
+#selected_infoblock .shareLink a:hover {
+    background-color: #00596B;
+}
+
+/* Ícone */
+#selected_infoblock .shareLink .fa-share-nodes {
+    font-size: 21px;
+}
+/* Mantém o ID ICAO ajustado abaixo da linha principal */
+#selected_icao {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Aproxima o Hex da foto, mantendo pequeno espaço */
+#selected_infoblock .highlightedTitle {
+    padding-bottom: 4px !important;
+}
+
+#reg_info {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+#photo_container td {
+    padding-top: 0 !important;
+}
+/*
+#selected_infoblock .identLarge {
+    color: #327DB6 !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 22px !important;
+    font-weight: bold !important;
+    line-height: 24px !important;
+}
+
+#selected_infoblock .identLarge {
+    color: #FFFFFF !important;
+    font-family: "Roboto", "Helvetica Neue", Arial, sans-serif !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    line-height: 24px !important;
+
+    display: inline-block;
+    background: #327DB6;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.3px;
+}
+*/
+/* Remove o fundo do container pai para evitar caixas aninhadas */
+#selected_infoblock .identLarge {
+    background: transparent !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 1px !important; /* Espaçamento entre as badges */
+}
+
+/* Fundo e estilo do Callsign */
+#selected_callsign, #highlighted_callsign {
+    background: #00596B !important;
+    color: #FFFFFF !important;
+    font-family: "Roboto", "Helvetica Neue", Arial, sans-serif !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    line-height: 24px !important;
+    padding: 2px 9px !important;
+    border-radius: 5px !important;
+    letter-spacing: 0.4px !important;
+    display: inline-block !important;
+}
+
+/* Fundo e estilo do Tipo da Aeronave */
+#selected_icaotype, #highlighted_icaotype {
+    background: #2D3748 !important; /* Cor de fundo do Tipo (ajuste se desejar) */
+    color: #FFFFFF !important;
+    font-family: "Roboto", "Helvetica Neue", Arial, sans-serif !important;
+    font-size: 16px !important; /* Um pouco menor que o callsign */
+    font-weight: 700 !important;
+    line-height: 24px !important;
+    padding: 2px 8px !important;
+    border-radius: 5px !important;
+    display: inline-block !important;
+}
+
+/* Esconde a caixa do tipo caso não haja dados */
+#selected_icaotype:empty, #highlighted_icaotype:empty {
+    display: none !important;
+}
+/*Ocultar o botão x Infoblock*/
+.infoblockCloseBox {
+    display: none !important;
+}
+
+/* =========================================
+   LINHA DO HEX E DO PAÍS
+========================================= */
+
+.hexCountryRow {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin-top: 4px !important;
+}
+
+.countryTop {
+  display: flex !important;
+  align-items: center !important;
+  margin-left: auto !important;
+  margin-right: 1px !important;
+  transform: translateX(18px); /*mudar posição do nome país */
+}
+.countryTop #selected_country {
+    font-family: Arial, sans-serif !important;
+    font-size: 13px !important;
+    font-weight: normal !important;
+    line-height: normal !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    white-space: nowrap !important;
+}
+
+/* Garante que a fonte do país combine com o tamanho do Hex 
+.countryTop #selected_country {
+  font-size: 13px !important; 
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Espaço entre a bandeira e o texto */
+}*/
+
+/* =========================================
+   LOGO DA COMPANHIA - INFOBLOCK
+   ========================================= */
+
+#selected_airline_logo {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    margin-right: 1px !important;
+    transform: translate(2px, 0px);
+}
+
+#selected_airline_logo img {
+    display: block;
+    width: auto;
+    height: 32px !important;
+    max-width: 45px;
+    object-fit: contain;
+}
+
+/* Nome da companhia aérea */
+.airlineNameRow {
+    display: block !important;
+    width: max-content !important;
+    max-width: 170px !important;
+    box-sizing: border-box !important;
+
+    margin-top: 2px !important;
+    margin-bottom: 0 !important;
+    margin-left: 0 !important;
+    padding: 0 !important;
+
+    text-align: left !important;
+    white-space: nowrap !important;
+    font-size: calc(16px * var(--SCALE)) !important;
+    line-height: normal !important;
+    color: #808080 !important;
+    font-weight: normal !important;
+}
+
+#photo_container {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+#photo_container td {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+/* Cor dos controles do seletor de camadas */
+.layer-switcher input {
+    accent-color: #0a52ff;
+}
+/* Espaço entre o callsign e o tipo da aeronave */
+#selected_infoblock #selected_callsign {
+    margin-right: 5px !important;
 }

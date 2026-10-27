@@ -736,12 +736,13 @@ PlaneObject.prototype.getMarkerColor = function(options) {
     if (alt == "ground") {
         l += 15;
     }
-
+    // Cor da Aeronave selecionada Amarelo
     // If this marker is selected, change color
-    if (this.selected && !SelectedAllPlanes && !onlySelected){
-        h += ColorByAlt.selected.h;
-        s += ColorByAlt.selected.s;
-        l += ColorByAlt.selected.l;
+    // Aeronave selecionada: amarelo-dourado fixo
+    if (this.selected && !SelectedAllPlanes && !onlySelected) {
+        h = 51;
+        s = 100;
+        l = 50;
     }
 
     // If this marker is a mlat position, change color
@@ -3163,7 +3164,7 @@ PlaneObject.prototype.setFlight = function(flight) {
     if (flight == null) {
         if (now - this.flightTs > 10 * 60) {
             this.flight = null;
-            this.name ='no callsign';
+            this.name ='-';
         }
     } else if (flight == "@@@@@@@@") {
         this.flight = null;

@@ -370,7 +370,7 @@ function fetchFail(jqxhr, status, error) {
             checkMovement();
         }
         status = jqxhr.status;
-        if (jqxhr.readyState == 0) error = "Can't connect to server, check your network!";
+        if (jqxhr.readyState == 0) error = "Não é possível conectar ao servidor. Verifique sua rede!";
         let errText = status + (error ? (": " + error) : "");
         console.log(jqxhr);
         console.log(error);
@@ -545,22 +545,32 @@ function lookupAirlineForCallsign(callsign, registration) {
 }
 
 function updateSelectedAirline(selected) {
+
     if (!airlineLookup) {
         jQuery('#selected_airline_row').addClass('hidden');
-        jQuery('#selected_airline').updateText('n/a');
-        jQuery('#selected_airline').attr('title', 'Airline lookup disabled');
+        jQuery('#selected_airline_top').updateText('');
+        jQuery('#selected_airline_top').attr('title', 'Airline lookup disabled');
         return;
     }
-    jQuery('#selected_airline_row').removeClass('hidden');
 
-    let operatorData = selected.getAirline ? selected.getAirline() : lookupAirlineForCallsign(selected.name, selected.registration);
-    if (operatorData) {
-        let title = operatorData.c ? operatorData.c + (operatorData.r ? ' / ' + '"' + operatorData.r + '"' : '') : (operatorData.r || '');
-        jQuery('#selected_airline').updateText(operatorData.n || 'n/a');
-        jQuery('#selected_airline').attr('title', title || '');
+    let operatorData = selected.getAirline
+        ? selected.getAirline()
+        : lookupAirlineForCallsign(selected.name, selected.registration);
+
+    if (operatorData && operatorData.n) {
+
+        let title = operatorData.c
+            ? operatorData.c + (operatorData.r ? ' / "' + operatorData.r + '"' : '')
+            : (operatorData.r || '');
+
+        jQuery('#selected_airline_top').updateText(operatorData.n);
+        jQuery('#selected_airline_top').attr('title', title || '');
+
     } else {
-        jQuery('#selected_airline').updateText('n/a');
-        jQuery('#selected_airline').attr('title', 'No airline match');
+
+        jQuery('#selected_airline_top').updateText('');
+        jQuery('#selected_airline_top').attr('title', 'No airline match');
+
     }
 }
 
@@ -914,21 +924,21 @@ function initPage() {
         };
         new Toggle({
             key: "moreTableLines1",
-            display: "More Table Lines",
+            display: "Mais linhas na tabela",
             container: "#sidebar-table",
             init: false,
             setState: setGlobeTableLimit,
         });
         new Toggle({
             key: "moreTableLines2",
-            display: "Even More Table Lines",
+            display: "Ainda mais linhas na tabela",
             container: "#sidebar-table",
             init: false,
             setState: setGlobeTableLimit,
         });
         new Toggle({
             key: "allTableLines",
-            display: "All Table Lines",
+            display: "Todas as linhas da tabela",
             container: "#sidebar-table",
             init: false,
             setState: setGlobeTableLimit,
@@ -1417,7 +1427,7 @@ function earlyInitPage() {
 
     new Toggle({
         key: "lastLeg",
-        display: "Last Leg only",
+        display: "Somente o último trecho",
         container: "#settingsLeft",
         init: true,
         setState: function(state) {
@@ -1505,7 +1515,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "utcTimesLive",
-        display: "Live track labels: UTC",
+        display: "Rótulos dos rastros em tempo real: UTC",
         container: "#settingsLeft",
         init: utcTimesLive,
         setState: function(state) {
@@ -1517,7 +1527,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "utcTimesHistoric",
-        display: "Historic track labels: UTC",
+        display: "Rótulos dos rastros históricos: UTC",
         container: "#settingsLeft",
         init: utcTimesHistoric,
         setState: function(state) {
@@ -1529,7 +1539,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "windLabelsSlim",
-        display: "Smaller wind labels",
+        display: "Rótulos de vento menores",
         container: "#settingsLeft",
         init: windLabelsSlim,
         setState: function(state) {
@@ -1544,7 +1554,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "showLabelUnits",
-        display: "Label units",
+        display: "Unidades nos rótulos",
         container: "#settingsLeft",
         init: showLabelUnits,
         setState: function(state) {
@@ -1569,7 +1579,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "shareFilters",
-        display: "Include Filters In URLs",
+        display: "Incluir filtros nos endereços (URLs)",
         container: "#settingsRight",
         init: false,
         setState: function(state) {
@@ -1579,7 +1589,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "debugTracks",
-        display: "Debug Tracks",
+        display: "Depurar rastros",
         container: "#settingsRight",
         init: false,
         setState: function(state) {
@@ -1590,7 +1600,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "debugAll",
-        display: "Debug show all",
+        display: "Depuração: mostrar tudo",
         container: "#settingsRight",
         init: false,
         setState: function(state) {
@@ -1617,7 +1627,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "updateLocation",
-        display: "Update GPS location",
+        display: "Atualizar localização GPS",
         container: "#settingsRight",
         init: updateLocation,
         setState: function(state) {
@@ -1628,7 +1638,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "autoselect",
-        display: "Auto-select plane",
+        display: "Selecionar aeronave automaticamente",
         container: "#settingsRight",
         init: autoselect,
         setState: function(state) {
@@ -1643,7 +1653,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "ColoredPlanes",
-        display: "Colored Planes",
+        display: "Aeronaves coloridas",
         container: "#settingsRight",
         init: true,
         setState: function(state) {
@@ -1658,7 +1668,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "ColoredTrails",
-        display: "Colored Trails",
+        display: "Rastros coloridos",
         container: "#settingsRight",
         init: true,
         setState: function(state) {
@@ -1673,7 +1683,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "sidebar_visible",
-        display: "Sidebar visible",
+        display: "Sidebar visível",
         container: null,
         checkbox: null,
         button: '#toggle_sidebar_button',
@@ -1728,7 +1738,7 @@ jQuery('#selected_altitude_geom1')
     }
     new Toggle({
         key: "planespottingAPI",
-        display: "Pictures planespotting.be",
+        display: "Fotos planespotting.be",
         container: "#settingsRight",
         init: planespottingAPI,
         setState: function(state) {
@@ -1742,7 +1752,7 @@ jQuery('#selected_altitude_geom1')
     });
     new Toggle({
         key: "planespottersAPI",
-        display: "Pictures planespotters.net",
+        display: "Fotos planespotters.net",
         container: "#settingsRight",
         init: planespottersAPI,
         setState: function(state) {
@@ -1762,7 +1772,7 @@ jQuery('#selected_altitude_geom1')
         }
         new Toggle({
             key: "useRouteAPI",
-            display: "Lookup route",
+            display: "Consultar Rota",
             container: "#settingsRight",
             init: useRouteAPI,
             setState: function(state) {
@@ -1790,7 +1800,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "enableInfoblock",
-        display: "Enable Infoblock",
+        display: "Ativar Infoblock",
         container: "#settingsRight",
         init: true,
         setState: function(state) {
@@ -1800,7 +1810,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "wideInfoblock",
-        display: "Wide Infoblock",
+        display: "Infoblock Largo",
         container: "#settingsRight",
         init: wideInfoBlock,
         setState: function(state) {
@@ -1816,7 +1826,7 @@ jQuery('#selected_altitude_geom1')
 
     new Toggle({
         key: "enableMouseover",
-        display: "Enable mouse-over block",
+        display: "Ativar painel ao passar o mouse",
         container: "#settingsRight",
         init: enableMouseover,
         setState: function(state) {
@@ -1889,7 +1899,7 @@ function initLegend(colors) {
     if (!globeIndex)
         html += '<div class="legendTitle" style="background-color:' + colors['modeS'] + ';">Mode-S</div>';
     if (globeIndex)
-        html += '<div class="legendTitle" style="background-color:' + colors['other'] + ';">Other</div>';
+        html += '<div class="legendTitle" style="background-color:' + colors['other'] + ';">Outro</div>';
     if (aiscatcher_server)
         html += '<div class="legendTitle" style="background-color:' + colors['ais'] + ';">AIS</div>';
     html += '<div class="legendTitle" style="background-color:' + colors['adsc'] + `;">${jaeroLabel}</div>`;
@@ -1909,7 +1919,7 @@ function initSourceFilter(colors) {
     html += createFilter(colors['mlat'], 'MLAT', sources[2]);
     html += createFilter(colors['tisb'], 'TIS-B', sources[3]);
     html += createFilter(colors['modeS'], 'Mode-S', sources[4]);
-    html += createFilter(colors['other'], 'Other', sources[5]);
+    html += createFilter(colors['other'], 'Outro', sources[5]);
     html += createFilter(colors['adsc'], jaeroLabel, sources[6]);
 
     if (aiscatcher_server) {
@@ -1942,7 +1952,7 @@ function initFlagFilter(colors) {
     };
 
     let html = '';
-    html += createFilter(colors['tisb'], 'Military', flagFilterValues[0]);
+    html += createFilter(colors['tisb'], 'Militar', flagFilterValues[0]);
     //html += createFilter(colors['mlat'], 'Interesting');
     html += createFilter(colors['uat'], 'PIA', flagFilterValues[1]);
     html += createFilter(colors['adsb'], 'LADD', flagFilterValues[2]);
@@ -2529,7 +2539,7 @@ function webglAddLayer() {
         webglLayer = new ol.layer.WebGLPoints({
             name: 'webglLayer',
             type: 'overlay',
-            title: 'Aircraft pos. webGL',
+            title: 'Posição da aeronave em WebGL',
             source: webglFeatures,
             declutter: false,
             zIndex: 200,
@@ -2871,7 +2881,7 @@ function initMapEarly() {
     siteCircleLayer = new ol.layer.Vector({
         name: 'siteCircles',
         type: 'overlay',
-        title: 'Range rings',
+        title: 'Círculos de alcance',
         source: siteCircleFeatures,
         visible: SiteCircles,
         zIndex: 100,
@@ -2929,7 +2939,7 @@ function initMap() {
     locationDotLayer = new ol.layer.Vector({
         name: 'locationDot',
         type: 'overlay',
-        title: (receiverJson && receiverJson.lat != null) ? 'Site position' : 'Your position',
+        title: (receiverJson && receiverJson.lat != null) ? 'Posição do site' : 'Sua Posição',
         source: locationDotFeatures,
         visible: SiteShow,
         zIndex: 100,
@@ -2963,7 +2973,7 @@ function initMap() {
         actualOutline.layer = new ol.layer.Vector({
             name: 'actualRangeOutline',
             type: 'overlay',
-            title: 'actual range outline',
+            title: 'Contorno do alcance real',
             source: actualOutline.features,
             zIndex: 101,
             renderBuffer: renderBuffer,
@@ -2997,7 +3007,7 @@ function initMap() {
 
     trailLayers = new ol.layer.Group({
         name: 'ac_trail',
-        title: 'Aircraft trails',
+        title: 'Rastros das Aeronaves',
         type: 'overlay',
         layers: trailGroup,
         zIndex: 150,
@@ -3008,7 +3018,7 @@ function initMap() {
     iconLayer = new ol.layer.Vector({
         name: 'iconLayer',
         type: 'overlay',
-        title: 'Aircraft positions',
+        title: 'Posições das Aeronaves',
         source: PlaneIconFeatures,
         declutter: false,
         zIndex: 200,
@@ -3041,7 +3051,7 @@ function initMap() {
 
     new Toggle({
         key: "darkerColors",
-        display: "Darker Colors",
+        display: "Cores mais Escuras",
         container: "#settingsLeft",
         init: darkerColors,
         setState: function(state) {
@@ -3069,7 +3079,7 @@ function initMap() {
     }
     new Toggle({
         key: "darkMode",
-        display: "Dark Mode",
+        display: "Modo Escuro",
         container: "#settingsLeft",
         init: darkModeDefault,
         setState: function(state) {
@@ -3083,10 +3093,11 @@ function initMap() {
                 root.style.setProperty("--TXTCOLOR2","#D8D8D8");
                 root.style.setProperty("--TXTCOLOR3","#a8a8a8");
                 //invert the "x" images
-                jQuery(".infoblockCloseBox").css('filter','invert(100%)');
+               /* jQuery(".infoblockCloseBox").css('filter','invert(100%)');
                 jQuery(".infoblockCloseBox").css(' -webkit-filter','invert(100%)');
                 jQuery(".settingsCloseBox").css('filter','invert(100%)');
                 jQuery(".settingsCloseBox").css(' -webkit-filter','invert(100%)');
+                */
                 tableColors = tableColorsDark;
             } else {
                 root.style.setProperty("--BGCOLOR1", '#F8F8F8');
@@ -3094,11 +3105,11 @@ function initMap() {
                 root.style.setProperty("--TXTCOLOR1","#003f4b");
                 root.style.setProperty("--TXTCOLOR2","#050505");
                 root.style.setProperty("--TXTCOLOR3","#003f4b");
-                jQuery(".infoblockCloseBox").css('filter','invert(0%)');
+               /* jQuery(".infoblockCloseBox").css('filter','invert(0%)');
                 jQuery(".infoblockCloseBox").css(' -webkit-filter','invert(0%)');
                 jQuery(".settingsCloseBox").css('filter','invert(0%)');
                 jQuery(".settingsCloseBox").css(' -webkit-filter','invert(0%)');
-
+                */
                 tableColors = tableColorsLight;
             }
             if (loadFinished) {
@@ -3123,7 +3134,7 @@ function initMap() {
 
     new Toggle({
         key: "MapDim",
-        display: "Dim Map",
+        display: "Escurecer Mapa",
         container: "#settingsLeft",
         init: MapDim,
         setState: function(state) {
@@ -3446,28 +3457,112 @@ function displaySil() {
     selected.icao.toUpperCase();
 }
 
+// Qualidade da foto 
+
 function displayPhoto() {
-    if (!SelectedPlane)
+    if (!SelectedPlane) {
         return;
+    }
+
     if (!SelectedPlane.psAPIresponse) {
         displaySil();
         return;
     }
-    let photos = SelectedPlane.psAPIresponse["photos"] || SelectedPlane.psAPIresponse["images"];
-    if (!photos || photos.length == 0) {
+
+    const photos =
+        SelectedPlane.psAPIresponse["photos"] ||
+        SelectedPlane.psAPIresponse["images"];
+
+    if (!photos || photos.length === 0) {
         displaySil();
         adjustInfoBlock();
         return;
     }
-    let new_html="";
-    let photoToPull = photos[0]["thumbnail"]["src"] || photos[0]["thumbnail"];
-    let linkToPicture = photos[0]["link"];
-    //console.log(linkToPicture);
-    new_html = '<a class=\"link\" href="'+linkToPicture+'" target="_blank" rel="noopener noreferrer"><img id="airplanePhoto" src=' +photoToPull+'></a>';
-    let copyright = photos[0]["photographer"] || photos[0]["user"];
-    jQuery('#copyrightInfo').html("<span>Image © " + copyright +"</span>");
+
+    const p = photos[0];
+
+    // ---------------------------------------------------------
+    // Thumbnail padrão
+    // ---------------------------------------------------------
+    let thumbnailSrc = null;
+
+    if (p.thumbnail) {
+        if (typeof p.thumbnail === "object") {
+            thumbnailSrc = p.thumbnail.src || null;
+        } else if (typeof p.thumbnail === "string") {
+            thumbnailSrc = p.thumbnail;
+        }
+    }
+
+    // ---------------------------------------------------------
+    // Imagem maior, somente quando FORNECIDA pela API
+    // ---------------------------------------------------------
+    let largeSrc = null;
+
+    if (p.thumbnail_large) {
+        if (typeof p.thumbnail_large === "object") {
+            largeSrc = p.thumbnail_large.src || null;
+        } else if (typeof p.thumbnail_large === "string") {
+            largeSrc = p.thumbnail_large;
+        }
+    }
+
+    // Prioridade:
+    // 1. thumbnail_large oficial
+    // 2. thumbnail normal
+    const photoSrc = largeSrc || thumbnailSrc;
+
+    if (!photoSrc) {
+        displaySil();
+        adjustInfoBlock();
+        return;
+    }
+
+    const linkToPicture = p.link || photoSrc;
+
+    const new_html =
+        '<a class="link" href="' +
+        linkToPicture +
+        '" target="_blank" rel="noopener noreferrer">' +
+        '<img id="airplanePhoto" ' +
+        'src="' + photoSrc + '" ' +
+        'alt="Foto da aeronave">' +
+        '</a>';
+
+    const copyright =
+        p.photographer ||
+        p.user ||
+        "";
+
+    if (copyright) {
+        jQuery('#copyrightInfo').html(
+            "<span>Image © " + copyright + "</span>"
+        );
+    } else {
+        jQuery('#copyrightInfo').html("");
+    }
+
     setPhotoHtml(new_html);
     adjustInfoBlock();
+
+    // ---------------------------------------------------------
+    // Se a versão grande falhar, volta para thumbnail padrão
+    // ---------------------------------------------------------
+    if (largeSrc && thumbnailSrc && largeSrc !== thumbnailSrc) {
+        const img = document.getElementById('airplanePhoto');
+
+        if (img) {
+            img.onerror = function() {
+                console.warn(
+                    "thumbnail_large falhou; usando thumbnail:",
+                    largeSrc
+                );
+
+                this.onerror = null;
+                this.src = thumbnailSrc;
+            };
+        }
+    }
 }
 
 function refreshPhoto(selected) {
@@ -3508,7 +3603,7 @@ function refreshPhoto(selected) {
     }
     selected.psAPIparam = param;
 
-    setPhotoHtml("<p>Loading image...</p>");
+    setPhotoHtml("<p>Carregando imagem...</p>");
     jQuery('#copyrightInfo').html("<span></span>");
     //console.log(ts/1000 + 'sending psAPI request');
     selected.psAPIresponseTS = ts;
@@ -3581,12 +3676,67 @@ function refreshSelected() {
     refreshPhoto(selected);
 
     jQuery('#selected_callsign').updateText(selected.name);
+    
+    
+    // ============================================================
+    // LOGO DA COMPANHIA — EVITAR PISCAR
+    // ============================================================
+
+    var logoEl = document.getElementById("selected_airline_logo");
+
+    if (logoEl) {
+        var callsign = (selected.name || "").trim().toUpperCase();
+
+        var operatorData = selected.getAirline
+            ? selected.getAirline()
+            : lookupAirlineForCallsign(
+                selected.name,
+                selected.registration
+            );
+
+        // Só prossegue quando há uma companhia identificada
+        if (operatorData) {
+            var airlineCode = callsign.replace(/\s/g, "").substring(0, 3);
+
+            if (/^[A-Z]{3}$/.test(airlineCode)) {
+                if (logoEl.dataset.airlineCode !== airlineCode) {
+                    logoEl.dataset.airlineCode = airlineCode;
+                    logoEl.innerHTML = "";
+
+                    var logoImg = new Image();
+                    logoImg.alt = airlineCode;
+
+                    logoImg.onload = function() {
+                        if (logoEl.dataset.airlineCode === airlineCode) {
+                            logoEl.replaceChildren(logoImg);
+                        }
+                    };
+
+                    logoImg.onerror = function() {
+                        if (logoEl.dataset.airlineCode === airlineCode) {
+                            logoEl.innerHTML = "";
+                        }
+                    };
+
+                    logoImg.src =
+                        "http://192.168.1.3:5000/proxy/logo/" + airlineCode;
+                }
+            }
+
+
+
+
+        } else if (logoEl.dataset.airlineCode !== "") {
+        logoEl.dataset.airlineCode = "";
+        logoEl.innerHTML = "";
+        }
+   }
 
     if (showTrace) {
         if (selected.position_time) {
             const date = new Date(selected.position_time * 1000);
             let timestamp = utcTimesHistoric ? (zuluTime(date) + NBSP + 'Z') : (lDateString(date) + ' ' + localTime(date) + NBSP + TIMEZONE);
-            jQuery('#trace_time').updateText('Time:\n' + timestamp);
+            jQuery('#trace_time').updateText('Hora:\n' + timestamp);
         } else {
             jQuery('#trace_time').updateText('Time:\n');
         }
@@ -3634,9 +3784,9 @@ function refreshSelected() {
     if (selected.pia)
         dbFlags += '<a class="link" target="_blank" href="https://www.faa.gov/air_traffic/technology/equipadsb/privacy/" rel="noreferrer">PIA</a> / ';
     if (selected.military)
-        dbFlags += 'military / ';
+        dbFlags += 'militar / ';
     if (dbFlags.length == 0) {
-        jQuery('#selected_dbFlags').updateText("none");
+        jQuery('#selected_dbFlags').updateText("Nenhum");
     } else {
         jQuery('#selected_dbFlags').html(dbFlags.slice(0, -3));
     }
@@ -3680,8 +3830,8 @@ function refreshSelected() {
     jQuery('#selected_onground').updateText(format_onground(selected.altitude));
 
     if (selected.squawk == null || selected.squawk == '0000') {
-        jQuery('#selected_squawk1').updateText('n/a');
-        jQuery('#selected_squawk2').updateText('n/a');
+        jQuery('#selected_squawk1').updateText('Sem Código');
+        jQuery('#selected_squawk2').updateText('Sem Código');
     } else if (selected.spi) {
         jQuery('#selected_squawk1').updateText("IDENT " + selected.squawk);
         jQuery('#selected_squawk2').updateText("IDENT " + selected.squawk);
@@ -3695,7 +3845,7 @@ function refreshSelected() {
             jQuery('#selected_route').updateText(selected.routeString);
             jQuery('#selected_route').attr('title', selected.routeVerbose);
         } else {
-            jQuery('#selected_route').updateText('n/a');
+            jQuery('#selected_route').updateText('n/d');
         }
     }
 
@@ -3806,8 +3956,24 @@ function refreshSelected() {
     } else {
         jQuery('#selected_seen_pos').updateText('n/a');
     }
+    // --- NOVA LÓGICA DA BANDEIRA PARA O PAÍS ---
+    let countryHtml = '';
+    if (selected.country_code) {
+    // Usa o mesmo caminho de SVG que a sua tabela usa (flags/3x2/XX.svg)
+    let flagUrl = 'flags/3x2/' + selected.country_code.toUpperCase() + '.svg';
+    
+    // AJUSTES VISTOS ABAIXO: margin-right reduzido para 4px | adicionado position e top para subir 1px
+    countryHtml = '<img src="' + flagUrl + '" style="width: 18px; height: 12px; vertical-align: middle; margin-right: 4px; position: relative; top: -1px;" title="' + selected.country + '"> ';
+    }
 
-    jQuery('#selected_country').updateText(selected.country.replace("special use", "special"));
+    // Tratamento padrão que o tar1090 já fazia com o texto "special use"
+    let countryText = selected.country.replace("special use", "special");
+
+    // Injeta a bandeira + o nome limpo do país usando .html()
+    jQuery('#selected_country').html(countryHtml + countryText);
+    // -------------------------------------------
+   //jQuery('#selected_country').updateText(selected.country.replace("special use", "special"));
+   //jQuery('#selected_country').updateText(selected.country.replace("special use", "special"));
 
     if (selected.position == null) {
         jQuery('#selected_position').updateText('n/a');
@@ -3824,25 +3990,25 @@ function refreshSelected() {
         sitedist = ol.sphere.getDistance(SitePosition, selected.position);
     }
     jQuery('#selected_source').updateText(format_data_source(selected.dataSource));
-    jQuery('#selected_category').updateText(selected.category ? selected.category : "n/a");
+    jQuery('#selected_category').updateText(selected.category ? selected.category : "n/d");
     jQuery('#selected_category_label').updateText(get_category_label(selected.category));
     jQuery('#selected_sitedist1').updateText(format_distance_long(sitedist, DisplayUnits));
     jQuery('#selected_sitedist2').updateText(format_distance_long(sitedist, DisplayUnits));
-    jQuery('#selected_rssi1').updateText(selected.rssi != null ? selected.rssi.toFixed(1) : "n/a");
+    jQuery('#selected_rssi1').updateText(selected.rssi != null ? selected.rssi.toFixed(1) : "n/d");
     if (
         ((selected.messages == undefined && selected.receiverCount) || (globeIndex && binCraft))
         && !showTrace
     ) {
-        jQuery('#selected_message_count').prev().updateText('Receivers:');
-        jQuery('#selected_message_count').prop('title', 'Number of receivers receiving this aircraft');
+        jQuery('#selected_message_count').prev().updateText('Receptores:');
+        jQuery('#selected_message_count').prop('title', 'Número de receptores que estão recebendo sinais desta aeronave');
         if (selected.receiverCount >= 5 && selected.dataSource != 'mlat') {
             jQuery('#selected_message_count').updateText('> ' + selected.receiverCount);
         } else {
             jQuery('#selected_message_count').updateText(selected.receiverCount);
         }
     } else {
-        jQuery('#selected_message_count').prev().updateText('Messages:');
-        jQuery('#selected_message_count').prop('title', 'The total number of messages received from this aircraft');
+        jQuery('#selected_message_count').prev().updateText('Mensagens:');
+        jQuery('#selected_message_count').prop('title', 'Número total de mensagens recebidas desta aeronave');
         jQuery('#selected_message_count').updateText(selected.messages);
     }
     jQuery('#selected_message_rate').updateText((selected.messageRate != null) ? (selected.messageRate.toFixed(1)) : "n/a");
@@ -4140,7 +4306,7 @@ function refreshFeatures() {
         td: '<td class="icaoCodeColumn">',
     };
     cols.country = {
-        text: 'Flag',
+        text: 'Bandeira',
         header: function() { return ""; },
         sort: function () { sortBy('country', compareAlpha, function(x) { return x.country; }); },
         value: function(plane) { return (plane.country_code ? ('<img width="18" height="12" style="display: block;margin: auto;" src="flags/3x2/' + plane.country_code.toUpperCase() + '.svg" title="' + plane.country + '"></img>') : ''); },
@@ -4155,7 +4321,7 @@ function refreshFeatures() {
             return (plane.flight || '');
         },
         html: flightawareLinks,
-        text: 'Callsign' };
+        text: 'Indicativo' };
     cols.airline = {
         text: 'Airline',
         sort: function () { sortBy('airline', compareAlphaCI, function(x) {
@@ -4184,19 +4350,19 @@ function refreshFeatures() {
                 }
             },
             html: true,
-            text: 'Route' };
+            text: 'Rota' };
     }
     cols.registration = {
         sort: function () { sortBy('registration', compareAlpha, function(x) { return x.registration; }); },
         value: function(plane) { return (flightawareLinks ? getFlightAwareIdentLink(plane.registration, plane.registration) : (plane.registration ? plane.registration : "")); },
         html: flightawareLinks,
-        text: 'Registration' };
+        text: 'Matrícula' };
     cols.type = {
         sort: function () { sortBy('type', compareAlpha, function(x) { return x.icaoType; }); },
         value: function(plane) { return (plane.icaoType != null ? plane.icaoType : ""); },
-        text: 'Type' };
+        text: 'Tipo' };
     cols.squawk = {
-        text: 'Squawk',
+        text: 'Transponder',
         sort: function () { sortBy('squawk', compareAlpha, function(x) { return x.squawk; }); },
         value: function(plane) { return (plane.squawk != null ? plane.squawk : ""); },
         align: 'right' };
@@ -4208,7 +4374,7 @@ function refreshFeatures() {
         header: function () { return 'Alt.' + NBSP + '(' + get_unit_label("altitude", DisplayUnits) + ')';},
     };
     cols.speed = {
-        text: pTracks ? 'Max. Speed' : 'Speed',
+        text: pTracks ? 'Velocidade máxima' : 'Velocidade',
         sort: function () { sortBy('speed', compareNumeric, function(x) { return x.speed; }); },
         value: function(plane) { return format_speed_brief(plane.speed, DisplayUnits); },
         align: 'right',
@@ -4222,7 +4388,7 @@ function refreshFeatures() {
         header: function () { return 'V. Rate(' + get_unit_label("verticalRate", DisplayUnits) + ')';},
     };
     cols.sitedist = {
-        text: pTracks ? 'Max. Distance' : 'Distance',
+        text: pTracks ? 'Distância máxima' : 'Distância',
         sort: function () { sortBy('sitedist',compareNumeric, function(x) { return x.sitedist; }); },
         value: function(plane) { return format_distance_brief(plane.sitedist, DisplayUnits); },
         align: 'right',
@@ -4234,12 +4400,12 @@ function refreshFeatures() {
         value: function(plane) { return format_track_brief(plane.track); },
         align: 'right' };
     cols.msgs = {
-        text: 'Messages',
+        text: 'Mensagens',
         sort: function () { sortBy('msgs', compareNumeric, function(x) { return x.messages; }); },
         value: function(plane) { return plane.messages; },
         align: 'right' };
     cols.seen = {
-        text: 'Seen',
+        text: 'Visto há (s)',
         sort: function () { sortBy('seen', compareNumeric, function(x) { return x.seen; }); },
         value: function(plane) { return plane.seen.toFixed(0); },
         align: 'right' };
@@ -4259,14 +4425,14 @@ function refreshFeatures() {
         value: function(plane) { return (plane.position != null ? plane.position[0].toFixed(4) : ""); },
         align: 'right' };
     cols.data_source = {
-        text: 'Source',
+        text: 'Fonte',
         sort: function () { sortBy('data_source', compareNumeric, function(x) { return x.getDataSourceNumber(); } ); },
         value: function(plane) { return format_data_source(plane.getDataSource()); },
         align: 'right' };
     cols.military = {
-        text: 'Mil.',
-        sort: function () { sortBy('military', compareAlpha, function(x) { return (x.military ? 'yes' : 'no'); } ); },
-        value: function(plane) { return (plane.military ? 'yes' : 'no'); },
+        text: 'Militar',
+        sort: function () { sortBy('military', compareAlpha, function(x) { return (x.military ? 'Sim' : 'Não'); } ); },
+        value: function(plane) { return (plane.military ? 'Sim' : 'Não'); },
         align: 'right' };
     cols.wd = {
         text: 'Wind D.',
@@ -5285,7 +5451,7 @@ function toggleTableInView(arg) {
         loStore['tableInView'] = tableInView;
     }
 
-    jQuery('#with_positions').text(tableInView ? "On Screen:" : "With Position:");
+    jQuery('#with_positions').text(tableInView ? "Na tela:" : "Com Posição:");
 
     buttonActive('#V', tableInView);
 }
@@ -5585,10 +5751,10 @@ Filter.prototype.init = function() {
     const row = this.tbody.insertRow();
     row.innerHTML =
         `<td><form id="${this.id}">`
-        + '<div class="infoBlockTitleText">Filter by '+ this.name +':</div>'
+        + '<div class="infoBlockTitleText">Filtrar por '+ this.name +':</div>'
         + `<input id="${this.id}_input" name="${this.id}_name" type="text" class="searchInput" maxlength="1024">`
-        + '<button class="formButton" type="submit">Filter</button>'
-        + `<button class="formButton" id="${this.id}_reset">Reset</button>`
+        + '<button class="formButton" type="submit">Filtrar</button>'
+        + `<button class="formButton" id="${this.id}_reset">Limpar</button>`
         + '</form></td>'
     ;
     this.input = jQuery(this.sid + '_input');
@@ -5603,25 +5769,25 @@ function initFilters() {
     new Filter({
         key: 'callsign',
         field: 'name',
-        name: 'callsign',
+        name: 'indicativo',
         table: "filterTable",
     });
     new Filter({
         key: 'squawk',
         field: 'squawk',
-        name: 'squawk',
+        name: 'Transponder',
         table: "filterTable",
     });
     new Filter({
         key: 'type',
         field: 'icaoType',
-        name: 'type code',
+        name: 'Código do Tipo',
         table: "filterTable",
     });
     new Filter({
         key: 'description',
         field: 'typeDescription',
-        name: 'type description',
+        name: 'Descrição do Tipo',
         table: "filterTable",
     });
     new Filter({
@@ -5635,27 +5801,27 @@ function initFilters() {
     new Filter({
         key: 'registration',
         field: 'registration',
-        name: 'registration',
+        name: 'Matrícula',
         table: 'filterTable3'
     });
     if (routeApiUrl) {
         new Filter({
             key: 'route',
             field: 'routeString',
-            name: 'route',
+            name: 'Rota',
             table: 'filterTable3'
         });
     }
     new Filter({
         key: 'country',
         field: 'country',
-        name: 'country of registration',
+        name: 'País de registro',
         table: 'filterTable3'
     });
     new Filter({
         key: 'category',
         field: 'category',
-        name: 'category (A3,B0,..)',
+        name: 'Categoria (A3,B0,..)',
         table: 'filterTable3'
     });
 
@@ -6801,7 +6967,7 @@ function toggleShowTrace() {
         traceOpts = {};
         fetchData();
         legSel = -1;
-        jQuery('#leg_sel').text('Legs: All');
+        jQuery('#leg_sel').text('Trechos: Todos');
         if (!showTraceWasIsolation)
             toggleIsolation("off");
         //let string = pathName + '?icao=' + SelectedPlane.icao;
@@ -6841,7 +7007,7 @@ function legShift(offset, plane) {
         traceOpts.showTime = null;
 
     if (!multiSelect && !plane.fullTrace) {
-        jQuery('#leg_sel').text('No Data available for\n' + traceDateString);
+        jQuery('#leg_sel').text('Nenhum dado disponível para\n' + traceDateString);
         jQuery('#trace_time').text('UTC:\n');
     }
     if (!plane.fullTrace) {
@@ -6878,7 +7044,7 @@ function legShift(offset, plane) {
         legSel = -1;
 
     if (legSel == -1) {
-        jQuery('#leg_sel').text('Legs: All');
+        jQuery('#leg_sel').text('Trechos: Todos');
         traceOpts.legStart = null;
         traceOpts.legEnd = null;
         plane.processTrace();
@@ -6899,7 +7065,7 @@ function legShift(offset, plane) {
             count++;
         }
     }
-    jQuery('#leg_sel').text('Leg: ' + (legSel + 1));
+    jQuery('#leg_sel').text('Trecho: ' + (legSel + 1));
     traceOpts.legStart = legStart;
     traceOpts.legEnd = legEnd;
     plane.processTrace();
@@ -6946,7 +7112,7 @@ function shiftTrace(offset) {
     traceOpts.showTimeEnd = null;
     traceOpts.showTime = null;
 
-    jQuery('#leg_sel').text('Loading ...');
+    jQuery('#leg_sel').text('Carregando ...');
     if (!traceDate || offset == "today") {
         if (replay) {
             setTraceDate({ ts: replay.ts.getTime() });
@@ -7224,14 +7390,14 @@ function remakeTrails() {
         plane.updateFeatures();
     }
 }
-
+// mudar a cor da bolinha localização 
 function createLocationDot() {
     locationDotFeatures.clear();
     let markerStyle = new ol.style.Style({
         image: new ol.style.Circle({
             radius: 7,
             snapToPixel: false,
-            fill: new ol.style.Fill({color: 'black'}),
+            fill: new ol.style.Fill({color: 'blue'}),
             stroke: new ol.style.Stroke({
                 color: 'white', width: 2
             })
@@ -7884,7 +8050,7 @@ function currentExtent(factor) {
 }
 
 function replayDefaults(ts) {
-    jQuery("#replayPlay").html("Pause");
+    jQuery("#replayPlay").html("Pausar");
     let playing = true;
     let speed = 30;
     if (usp.has("replaySpeed")) {
@@ -7966,7 +8132,7 @@ function loadReplay(ts) {
 
         replay.loadingKey = rKey;
 
-        jQuery('#replayLoading').text('Loading ...');
+        jQuery('#replayLoading').text('Carregando ...');
 
         replay.abortController = new AbortController();
 
@@ -7985,7 +8151,7 @@ function loadReplay(ts) {
                 //console.log(`aborted: ${rKey}`);
                 return;
             }
-            jQuery("#update_error_detail").text(error.message + ' --> No data for this timestamp!');
+            jQuery("#update_error_detail").text(error.message + ' --> Não há dados para este horário!');
             jQuery("#update_error").css('display','block');
             replay.errorTimeout = setTimeout(() => { jQuery("#update_error").css('display','none'); }, 5000);
         };
@@ -8064,13 +8230,13 @@ function initReplay(chunk, data) {
 
 function setReplayTimeHint(date) {
     if (true || utcTimesHistoric) {
-        jQuery("#replayDateHintLocal").html(TIMEZONE + " Date: " + lDateString(date));
+        jQuery("#replayDateHintLocal").html("Data: " + lDateString(date) + " " + TIMEZONE);
         jQuery("#replayDateHint").html("" + zDateString(date));
         jQuery("#replayTimeHint").html("UTC:" + NBSP + zuluTime(date) + ' / ' + TIMEZONE + ":" + NBSP + localTime(date));
     } else {
         jQuery("#replayDateHintLocal").html("");
-        jQuery("#replayDateHint").html("Date: " + lDateString(date));
-        jQuery("#replayTimeHint").html("Time: " + localTime(date) + NBSP + TIMEZONE);
+        jQuery("#replayDateHint").html("Data:" + lDateString(date));
+        jQuery("#replayTimeHint").html("Hora:" + localTime(date) + NBSP + TIMEZONE);
     }
 }
 function replayOnSliderMove() {
@@ -8138,7 +8304,7 @@ function replayStep(arg) {
         return;
     }
     if (replay.loadedKey != replayGetChunk(replay.ts).key) {
-        console.error('no data loaded for current timestamp, can\'t play!');
+        console.error('Não há dados carregados para o horário atual, Não é possível reproduzir!');
         return;
     }
 
@@ -8441,7 +8607,7 @@ function playReplay(state){
             return;
         }
         replay.playing = true;
-        jQuery("#replayPlay").html("Pause");
+        jQuery("#replayPlay").html("Pausar");
         replayStep();
     } else {
         replay.playing = false;
@@ -8525,13 +8691,13 @@ function showReplayBar(){
             max: Math.pow(1000, 1 / slideBase),
             slide: function(event, ui) {
                 replay.speed = Math.pow(ui.value, slideBase).toFixed(1);
-                jQuery('#replaySpeedHint').text('Speed: ' + replay.speed + 'x');
+                jQuery('#replaySpeedHint').text('Velocidade: ' + replay.speed + 'x');
             },
             change: function(event, ui) {
                 replayStep();
             },
         });
-        jQuery('#replaySpeedHint').text('Speed: ' + replay.speed + 'x');
+        jQuery('#replaySpeedHint').text('Velocidade: ' + replay.speed + 'x');
 
         jQuery("#selected_showTrace_hide").hide();
 
@@ -8756,15 +8922,15 @@ function registrationLink(plane) {
     }
 
     const countryLinks = {
-        Brazil: (reg) => `https://aeronaves.anac.gov.br/aeronaves/cons_rab_resposta_en.asp?textMarca=${reg}`,
+        Brasil: (reg) => `https://aeronaves.anac.gov.br/aeronaves/cons_rab_resposta_en.asp?textMarca=${reg}`,
         // CASA only lists VH- regs (not RAAus 24-xxxx or ADF A56-xxx)
-        Australia: (reg) => reg.startsWith('VH-') ? `https://www.casa.gov.au/search-centre/aircraft-register?reg=${reg.slice(3)}` : '',
+        Austrália: (reg) => reg.startsWith('VH-') ? `https://www.casa.gov.au/search-centre/aircraft-register?reg=${reg.slice(3)}` : '',
         Jamaica: (reg) => `https://www.jcaa.gov.jm/aircraft-registry/${reg}`,
         Montenegro: (reg) => `https://www.caa.me/en/registri?field_registarska_oznaka1_value=${reg}`,
-        Norway: (reg) => `https://www.luftfartstilsynet.no/aktorer/norges-luftfartoyregister/registrerte-luftfartoy/?mark=${reg}`,
-        Iceland: (reg) => `https://island.is/en/aircraft-registry?aq=${reg.replace(/^TF-/, '')}`,
-        "New Zealand": (reg) => `https://www.aviation.govt.nz/aircraft/aircraft-registration/aircraft-register-search/ShowDetails/${reg.replace(/^ZK-/, '')}`,
-        "United States": (reg) => `https://registry.faa.gov/AircraftInquiry/Search/NNumberResult?nNumberTxt=${reg.slice(1)}`
+        Noruega: (reg) => `https://www.luftfartstilsynet.no/aktorer/norges-luftfartoyregister/registrerte-luftfartoy/?mark=${reg}`,
+        Islândia: (reg) => `https://island.is/en/aircraft-registry?aq=${reg.replace(/^TF-/, '')}`,
+        "Nova Zelândia": (reg) => `https://www.aviation.govt.nz/aircraft/aircraft-registration/aircraft-register-search/ShowDetails/${reg.replace(/^ZK-/, '')}`,
+        "Estados Unidos": (reg) => `https://registry.faa.gov/AircraftInquiry/Search/NNumberResult?nNumberTxt=${reg.slice(1)}`
     };
 
     const generator = countryLinks[plane.country];
@@ -9144,37 +9310,60 @@ function printTrace() {
     _printTrace(SelectedPlane.recentTrace.trace);
 }
 
+// Copiar Link 
 function copyShareLink() {
-    navigator.clipboard.writeText(shareLink);
-
+    try {
+        navigator.clipboard.writeText(shareLink);
+    } catch (e) {
+        var el = document.createElement('textarea');
+        el.value = shareLink;
+        el.style.cssText = 'position:absolute;left:-9999px';
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+    }
     copyLinkTime = new Date().getTime();
     copiedIcao = SelectedPlane.icao;
     setSelectedIcao();
 }
-
 let copyLinkTime = 0;
 let copiedIcao = null;
 
 function setSelectedIcao() {
     const selected = SelectedPlane;
+    
+    // Evita atualizar sem necessidade se o avião for o mesmo e não houver cópia recente
     if (selected.icao == selIcao && copiedIcao == null) {
         return;
     }
     selIcao = selected.icao;
-    let hex_html = "<span style='font-family: monospace;' class=identSmall>Hex:" + NBSP + selected.icao.toUpperCase() + "</span>";
+
+    // 1. Renderiza APENAS o Hex code na linha antiga (removemos o ícone daqui)
+    let hex_html = "<span style='font-family: monospace;' class=identSmall>Hex:" + selected.icao.toUpperCase() + "</span>"; //Adiciona + NBSP depois do hex:" para colocar espaço 
+    jQuery('#selected_icao').html(hex_html);
+
+    // 2. Controla o SEU botão novo de compartilhar no cabeçalho (#share_button)
     if (globeIndex || shareBaseUrl) {
         if (copiedIcao && (copiedIcao != selected.icao || new Date().getTime() - copyLinkTime > 2000)) {
             copiedIcao = null;
         }
-        let copy_link_text = (copiedIcao != null) ? "Copied" : ("Copy" + NBSP + "Link");
-        let icao_link = "<span  class=identSmall><a class='link identSmall' target=\"_blank\" href=\"" + shareLink +
-            "\" onclick=\"copyShareLink(); return false;\">" + copy_link_text + "</a></span>";
-        hex_html = hex_html + NBSP + NBSP + NBSP + icao_link;
-    }
-    jQuery('#selected_icao').html(hex_html);
 
-    jQuery('a.identSmall').prop('href',shareLink);
+        let shareButton = jQuery('#share_button');
+        
+        // Atualiza o link e o evento de clique do botão novo
+        shareButton.prop('href', shareLink);
+        shareButton.attr('onclick', 'copyShareLink(); return false;');
+
+        // Altera visualmente entre o ícone e o texto "Copiado"
+        if (copiedIcao != null) {
+            shareButton.html("<span class='identSmall' style='font-weight:bold;'>Copiado</span>");
+        } else {
+            shareButton.html("<i class='fa-solid fa-share-nodes'></i>");
+        }
+    }
 }
+
 
 function mapTypeSettings() {
     if (MapType_tar1090.startsWith('maptiler_sat') || MapType_tar1090.startsWith('maptiler_hybrid')) {

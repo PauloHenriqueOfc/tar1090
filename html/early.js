@@ -551,7 +551,7 @@ if (uuid != null) {
 
         setTimeout(function() {
             jQuery("#loader").addClass("hidden");
-            jQuery("#update_error_detail").text("Seems the decoder / receiver / backend isn't working correctly!");
+            jQuery("#update_error_detail").text("Parece que o decodificador, receptor ou backend não está funcionando corretamente!");
             jQuery("#update_error").css('display','block');
         }, 2000);
 
