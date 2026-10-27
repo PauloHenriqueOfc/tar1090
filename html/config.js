@@ -6,8 +6,8 @@
 "use strict";
 // -- Title Settings --------------------------------------
 // Show number of aircraft and/or messages per second in the page title
-//PlaneCountInTitle = false;
-//MessageRateInTitle = false;
+   PlaneCountInTitle = true;
+   MessageRateInTitle = true;
 
 // -- Output Settings -------------------------------------
 // The DisplayUnits setting controls whether nautical (ft, nmi, kt),
@@ -29,19 +29,19 @@
 // degrees.
 
 // The google maps zoom level, 0 - 16, lower is further out
-//DefaultZoomLvl   = 7;
+   DefaultZoomLvl   = 6.1;
 
 // specify lat lon that the 'auto-select plane' feature will choose the closest plane to
 // autoselectCoords = [42, 21];
 
-//SiteShow    = false;           // true to show a center marker
-//SiteName    = "My Radar Site"; // tooltip of the marker
+   SiteShow    = true;           // true to show a center marker
+   SiteName    = "SJP Radar"; // tooltip of the marker
 
 // Update GPS location (keep map centered on GPS location)
-//updateLocation = false;
+   updateLocation = true;
 
 // Color controls for the heywhatsthat upintheair range outline
-//range_outline_color = '#0000DD';
+   range_outline_color = '#0000DD';
 //range_outline_alpha = 1.0;
 //range_outline_width = 1.7;
 //range_outline_colored_by_altitude = false;
@@ -50,13 +50,13 @@
 //
 //
 // Style controls for the actual range outline (dynamic, by default 24h retention, see readsb options)
-// actual_range_outline_color = '#00596b';
+    actual_range_outline_color = '#28941e';
 // actual_range_outline_width = 1.7;
 // NOTE: dashed lines cause slowdown when zooming in, not recommended
 // actual_range_outline_dash = null; // null - solid line, [5, 5] - dashed line with 5 pixel lines and spaces in between
 
 // Enable / disable showing the actual range outline when first visiting the page
-// actual_range_show = true;
+    actual_range_show = true;
 
 // which map is displayed to new visitors
 // MapType_tar1090 = "osm";
@@ -89,9 +89,9 @@
 // dwdLayers = 'dwd:RX-Produkt';
 
 // Default map dim state, true or false.
-// MapDim = true;
-// mapDimPercentage = 0.45;
-// mapContrastPercentage = 0;
+    MapDim = true;
+    mapDimPercentage = 0.20;
+    mapContrastPercentage = 0;
 
 // opacities for various overlays
 // nexradOpacity = 0.35
@@ -100,7 +100,7 @@
 // rainViewerCloudsOpacity = 0.30;
 // noaaInfraredOpacity = 0.35;
 // noaaRadarOpacity = 0.35;
-// openAIPOpacity = 0.70;
+    openAIPOpacity = 0.90;
 // tfrOpacity = 0.70;
 
 // -- Marker settings -------------------------------------
@@ -140,57 +140,50 @@
 // covering this many minutes at the current ground speed, 0 disables
 // headingLineMinutes = 5;
 
-// altitudeChartDefaultState = true;
+    altitudeChartDefaultState = true;
 
 // These settings control the coloring of aircraft by altitude.
 // All color values are given as Hue (0-359) / Saturation (0-100) / Lightness (0-100)
 //
 // To enable these colors instead of the defaults, remove the /* and */ above and below the next block
 
-/*
-
 ColorByAlt = {
-	// HSL for planes with unknown altitude:
-	unknown : { h: 0,   s: 0,   l: 75 },
+    // Aeronave sem altitude conhecida
+    unknown : { h: 0, s: 0, l: 70 },
 
-	// HSL for planes that are on the ground:
-	ground  : { h: 0, s: 0, l: 45 },
+    // Aeronave no solo
+    ground : { h: 55, s: 90, l: 55 },
 
-	air : {
-		// These define altitude-to-hue mappings
-		// at particular altitudes; the hue
-		// for intermediate altitudes that lie
-		// between the provided altitudes is linearly
-		// interpolated.
-		//
-		// Mappings must be provided in increasing
-		// order of altitude.
-		//
-		// Altitudes below the first entry use the
-		// hue of the first entry; altitudes above
-		// the last entry use the hue of the last
-		// entry.
-		h: [ { alt: 2000,  val: 20 },    // orange
-			 { alt: 10000, val: 140 },   // light green
-			 { alt: 40000, val: 300 } ], // magenta
-		s: 88,
-		l: 44,
-	},
+    air : {
+        // Estilo semelhante ao gradiente do Flightradar24
+        // altitude em pés / hue HSL
 
-	// Changes added to the color of the currently selected plane
-	selected : { h: 0, s: -10, l: +20 },
+        h: [
+            { alt: 300,   val: 55  },   // amarelo
+            { alt: 1000,  val: 60  },   // amarelo
+            { alt: 3300,  val: 120 },   // verde
+            { alt: 8200,  val: 180 },   // ciano
+            { alt: 13100, val: 195 },   // azul-ciano
+            { alt: 19700, val: 230 },   // azul
+            { alt: 26200, val: 245 },   // azul forte
+            { alt: 32800, val: 270 },   // violeta
+            { alt: 39400, val: 295 },   // roxo
+            { alt: 42600, val: 359 }    // vermelho
+        ],
 
-	// Changes added to the color of planes that have stale position info
-	stale :    { h: 0, s: -10, l: +30 },
+        s: 95,
+        l: 48,
+    },
 
-	// Changes added to the color of planes that have positions from mlat
-	mlat :     { h: 0, s: -10, l: -10 },
+    // Aeronave selecionada
+    selected : { h: 0, s: +5, l: +5 },
 
-	// HSL for planes that are squawking IDENT
-	ident :    { h: 0, s: 0, l: 100 }
+    // Dados antigos
+    stale : { h: 0, s: -10, l: +25 },
+
+    // Posição MLAT
+    mlat : { h: 0, s: -10, l: -10 }
 };
-
-*/
 
 // For a monochrome display try this:
 // ColorByAlt = {
@@ -207,29 +200,29 @@ ColorByAlt = {
 // Also called range rings :)
 //SiteCircles = true; // true to show circles (only shown if the center marker is shown)
 // In miles, nautical miles, or km (depending settings value 'DisplayUnits')
-//SiteCirclesDistances = new Array(100,150,200,250);
+    SiteCirclesDistances = new Array(100,150,200);
 // When more circles defined than cirle colors last color will be used or black by default
-//SiteCirclesColors = ['#FF0000', '#0000FF', '#00FF00'];
+    SiteCirclesColors = ['#606060', '#606060', '#606060'];
 // Show circles using dashed line (CAUTION, can be slow, especially when zooming in a lot)
 //SiteCirclesLineDash = [5, 5]; // null - solid line, [5, 5] - dashed line with 5 pixel lines and spaces in between
 
 // Controls page title, righthand pane when nothing is selected
-//PageName = "tar1090";
+   PageName = "SJP Radar 24";
 
 // Show country flags by ICAO addresses?
-//ShowFlags = true;
+    ShowFlags = true;
 
 // Provide a Mapbox API key here to enable the Mapbox vector layers.
 // You can obtain a free key (with usage limits) at
 // https://www.mapbox.com/
 //
 // Be sure to quote your key:
-//   MapboxAPIKey = "your key here";
+    MapboxAPIKey = "pk.eyJ1Ijoib3BhdWxvaGVucmlxdWUiLCJhIjoiY211ZzJ2cWtnMGNpaTQ4cTkxbTJ3d3kwZyJ9.nUSLCWCDxhh0DEgt_WNCbA";
 //
 //MapboxAPIKey = null;
 //
 // Carto api key
-//carto_api_key = "";
+    carto_api_key = "cb1_3uhz_1_4bd5d4bdee7532090d4d2d46";
 
 // This determines what is up, default is north (0 degrees)
 //mapOrientation = 0;
@@ -246,21 +239,21 @@ ColorByAlt = {
 //labelZoomAIS = 11.8;
 
 // font family for labels, default bold, could be empty or italic as well
-// labelStyle = 'bold';
-// labelFamily = 'Tahoma, Verdana, Helvetica, sans-serif';
-// labelScale = 1;
+    labelStyle = 'bold';
+    labelFamily = 'Tahoma, Verdana, Helvetica, sans-serif';
+    labelScale = 1;
 
 // show the current map zoom level above the scale line
-// showZoomLevel = true;
+    showZoomLevel = true;
 
 // Default state of the U / T / L / O / K buttons on page load.
 // L / O / K are remembered by the browser once clicked, the default only applies before that.
 // O has no visible effect unless labels (L) are on.
-// defaultMilitaryOnly = false;    // U: only show military aircraft
-// defaultAllTracks = false;       // T: show all tracks
-// defaultLabels = false;          // L: aircraft labels
-// defaultExtendedLabels = 0;      // O: label extension, 0 - 3
-// defaultTrackLabels = false;     // K: track labels
+    defaultMilitaryOnly = false;    // U: only show military aircraft
+    defaultAllTracks = false;       // T: show all tracks
+    defaultLabels = true;          // L: aircraft labels
+    defaultExtendedLabels = 3;      // O: label extension, 0 - 3
+    defaultTrackLabels = false;     // K: track labels
 
 // globalScale = 1;
 // userScale = 1;
@@ -277,8 +270,8 @@ ColorByAlt = {
 // is running on the token 'HOSTNAME' (without quotes) in the Link
 // text will be replaced with the current hostname at runtime
 //
-// imageConfigLink = "";
-// imageConfigText = "";
+    imageConfigLink = "http://adsb.local:8001/aircraft/";
+    imageConfigText = "Consulta ANAC";
 
 //flightawareLinks = false;
 //shareBaseUrl = 'https://adsb.lol/';
@@ -288,13 +281,13 @@ ColorByAlt = {
 // planespottersLinks = false;
 
 // show links to various registration websites (not all countries)
-// registrationLinks = true;
+    registrationLinks = true;
 // custom link for the registration, overrides the per country links (requires registrationLinks)
 // placeholders: REGISTRATION, ICAO, TYPE (type code, may be empty), values are URL-encoded
 // registrationLinkTemplate = 'https://duckduckgo.com/?q=TYPE+REGISTRATION&iax=images&ia=images';
 
 // enable callsign-based airline lookup from the operators database
-// airlineLookup = true;
+    airlineLookup = true;
 
 // Filter implausible positions (required speed > Mach 3.5)
 // valid values: true, false, "onlyMLAT" ("" required)
@@ -312,7 +305,7 @@ ColorByAlt = {
 //mlatTimeout = 30;
 
 // enable/disable mouseover/hover aircraft information
-//enableMouseover = true;
+   enableMouseover = true;
 
 // enable/disable temporary aircraft trails
 //tempTrails = false;
@@ -348,16 +341,16 @@ HideCols = [
 */ // remove this line to modify columns (and the one at the start)
 
 // show aircraft pictures
-// showPictures = true;
+    showPictures = true;
 // get pictures from planespotters.net
 // planespottersAPI = true;
 // get pictures from planespotting.be
 // planespottingAPI = true;
 
 // get flight route from routeApi service default setting (toggle via settings checkbox)
-// useRouteAPI = false;
+    useRouteAPI = true;
 // configure route display, possible values: iata, icao, city (can use multiple like this: iata+city)
-// routeDisplay = 'iata';
+    routeDisplay = 'city';
 // which routeApi service to use
 // routeApiUrl = "https://adsb.im/api/0/routeset";
 // routeApiUrl = "https://api.adsb.lol/api/0/routeset";
@@ -366,7 +359,7 @@ HideCols = [
 // show a link to jetphotos, only works if planespottersAPI is disabled
 // jetphotoLinks = false;
 
-// showSil = false;
+    showSil = true;
 // this shows small pictures in the details but they need to be provided by the user in the folder /usr/local/share/tar1090/aircraft_sil
 // showPictures needs to be enabled as well
 // to only get these pictures disable the planespottersAPI
@@ -378,16 +371,16 @@ HideCols = [
 // geomUseEGM = false; // use EGM96 for displaying geometric altitudes (extra load time!)
 // baroUseQNH = false;
 
-// windLabelsSlim = false;
-// showLabelUnits = true;
+     windLabelsSlim = true;
+     showLabelUnits = true;
 //
-// wideInfoBlock = false;
-// baseInfoBlockWidth = 200;
+    wideInfoBlock = true;
+    baseInfoBlockWidth = 240;
 
 //enableDWD = true;
 
 // Display only the last leg of a flight in globeIndex mode.
-//lastLeg = true;
+  lastLeg = true;
 //
 //hideButtons = false;
 //
@@ -396,7 +389,7 @@ HideCols = [
 //filterMaxRange = 50; // don't show aircraft further than 50 nmi from the receiver
 //
 //
-//darkModeDefault = true; // turn on dark mode by default (change in browser possible)
+   darkModeDefault = true; // turn on dark mode by default (change in browser possible)
 //
 //
 //jaeroTimeout = 35 * 60; // in seconds
@@ -409,6 +402,7 @@ HideCols = [
 
 //audio_url = ["", "", "", "", "", ""]; // show html5 audio player for these URLs
 // example with titles: audio_url = [ ["URL1", "title1" ], ["URL2", "title2"] ];
+audio_url = [ ["http://192.168.1.3:8000/Sao_Joao_do_Piaui_ATC.mp3", "SJP Radar" ],  ["http://d.liveatc.net/sbte2", "Teresina SBTE" ], ["http://d.liveatc.net/sbpl", "Petrolina SBPL"], ["http://d.liveatc.net/sbju", "Juazeiro do Norte SBJU Tower/Center"], ["http://d.liveatc.net/sbpb2", "Parnaiba SBPB Info"] ]; 
 
 // aiscatcher_server = "http://192.168.1.113:8100"; // update with your server address
 // aiscatcher_refresh = 15; // refresh interval in seconds
