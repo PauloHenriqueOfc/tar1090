@@ -19,9 +19,10 @@
 // speedUnits, distanceUnits), same values as DisplayUnits. The Units dropdown in
 // the settings doesn't affect overridden quantities.
 // e.g. metric everywhere except altitude in feet:
-//DisplayUnits = "metric";
 //altitudeUnits = "nautical";
 //verticalRateUnits = "nautical";
+//speedUnits = "nautical";
+//distanceUnits = "nautical";
 
 // -- Map settings ----------------------------------------
 // These settings are overridden by any position information
@@ -142,6 +143,9 @@
 
     altitudeChartDefaultState = true;
 
+// HSL for planes that are squawking IDENT
+// identOverrideColor = { h: 0, s: 0, l: 100 }
+
 // These settings control the coloring of aircraft by altitude.
 // All color values are given as Hue (0-359) / Saturation (0-100) / Lightness (0-100)
 //
@@ -177,10 +181,8 @@ ColorByAlt = {
 
     // Aeronave selecionada
     selected : { h: 0, s: +5, l: +5 },
-
     // Dados antigos
     stale : { h: 0, s: -10, l: +25 },
-
     // Posição MLAT
     mlat : { h: 0, s: -10, l: -10 }
 };

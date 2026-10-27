@@ -513,11 +513,14 @@ function db_load_operators_cache() {
     });
 }
 
-function lookupAirlineForCallsign(callsign, registration) {
+function lookupAirlineForCallsign(callsign, registration, category) {
     if (!airlineLookup || !operatorsCache) {
         return null;
     }
     if (!callsign) {
+        return null;
+    }
+    if (category && category.startsWith('C')) {
         return null;
     }
 
@@ -565,7 +568,6 @@ function updateSelectedAirline(selected) {
 
         jQuery('#selected_airline_top').updateText(operatorData.n);
         jQuery('#selected_airline_top').attr('title', title || '');
-
     } else {
 
         jQuery('#selected_airline_top').updateText('');
@@ -4185,12 +4187,7 @@ function refreshHighlighted() {
         jQuery('#highlighted_registration').text("n/a");
     }
 
-    let highlightedOperator = null;
-    if (highlighted.getAirline) {
-        highlightedOperator = highlighted.getAirline();
-    } else {
-        highlightedOperator = lookupAirlineForCallsign(highlighted.name, highlighted.registration);
-    }
+    let highlightedOperator = highlighted.getAirline();
     if (highlightedOperator) {
         jQuery('#highlighted_airline').text(highlightedOperator.n || 'n/a');
     } else {
@@ -4325,11 +4322,11 @@ function refreshFeatures() {
     cols.airline = {
         text: 'Airline',
         sort: function () { sortBy('airline', compareAlphaCI, function(x) {
-            let operatorData = x.getAirline ? x.getAirline() : lookupAirlineForCallsign(x.name, x.registration);
+            let operatorData = x.getAirline();
             return operatorData ? (operatorData.n || '') : null;
         }); },
         value: function(plane) {
-            let operatorData = plane.getAirline ? plane.getAirline() : lookupAirlineForCallsign(plane.name, plane.registration);
+            let operatorData = plane.getAirline();
             if (!operatorData) {
                 return '';
             }

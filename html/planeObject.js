@@ -758,10 +758,10 @@ PlaneObject.prototype.getMarkerColor = function(options) {
         l = 40;
     }
 
-    if (this.spi == 1) {
-        h = ColorByAlt.ident.h;
-        s = ColorByAlt.ident.s;
-        l = ColorByAlt.ident.l;
+    if (this.spi == 1 && identOverrideColor) {
+        h = identOverrideColor.h;
+        s = identOverrideColor.s;
+        l = identOverrideColor.l;
     }
 
     if (h < 0) {
@@ -2867,12 +2867,13 @@ PlaneObject.prototype.getAirline = function() {
     }
     const callsign = this.name || '';
     const registration = this.registration || '';
-    const key = `${callsign}|${registration}`;
+    const category = this.category || '';
+    const key = `${callsign}|${registration}|${category}`;
     if (this.airlineKey === key) {
         return this.airline;
     }
     this.airlineKey = key;
-    this.airline = lookupAirlineForCallsign(callsign, registration);
+    this.airline = lookupAirlineForCallsign(callsign, registration, category);
     return this.airline;
 };
 
