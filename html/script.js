@@ -9308,19 +9308,47 @@ function printTrace() {
 }
 
 // Copiar Link 
-function copyShareLink() {
+async function copyShareLink() {
+    if (!shareLink) {
+        console.warn("Não há link disponível para compartilhar.");
+        return;
+    }
+
+    let copied = false;
+
     try {
-        navigator.clipboard.writeText(shareLink);
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(shareLink);
+            copied = true;
+        }
     } catch (e) {
-        var el = document.createElement('textarea');
+        console.warn("A cópia pela API Clipboard falhou; tentando alternativa.", e);
+    }
+
+    if (!copied) {
+        const el = document.createElement('textarea');
         el.value = shareLink;
-        el.style.cssText = 'position:absolute;left:-9999px';
+        el.setAttribute('readonly', '');
+        el.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0';
         document.body.appendChild(el);
         el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
+        el.setSelectionRange(0, el.value.length);
+
+        try {
+            copied = document.execCommand('copy');
+        } catch (e) {
+            console.warn("A cópia alternativa falhou.", e);
+        } finally {
+            document.body.removeChild(el);
+        }
     }
-    copyLinkTime = new Date().getTime();
+
+    if (!copied) {
+        console.warn("Não foi possível copiar o link.");
+        return;
+    }
+
+    copyLinkTime = Date.now();
     copiedIcao = SelectedPlane.icao;
     setSelectedIcao();
 }
